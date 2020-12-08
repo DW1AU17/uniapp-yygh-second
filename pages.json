@@ -1,0 +1,123 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/tabBar/skip/skip",
+			"style": {
+				"navigationBarTitleText": "预约"
+			}
+		},
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "预约必读"
+			}
+		},
+		{
+			"path": "pages/pavilion/pavilion",
+			"style": {
+				"navigationBarTitleText": "选择医馆"
+			}
+		},
+		{
+			"path": "pages/subscribe/subscribe",
+			"style": {
+				"navigationBarTitleText": "选择科室"
+			}
+		},
+		{
+			"path": "pages/doctor/doctor",
+			"style": {
+				"navigationBarTitleText": "选择医生"
+			}
+		},
+		{
+			"path": "pages/tabBar/mine/mine",
+			"style": {
+				"navigationBarTitleText": "个人中心"
+			}
+		},
+		{
+			"path": "pages/source/source",
+			"style": {
+				"navigationBarTitleText": "号源列表",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#52627c"
+			}
+		},
+		{
+			"path": "pages/order/order",
+			"style": {
+				"navigationBarTitleText": "订单确认"
+			}
+		},
+		{
+			"path": "pages/registerRecord/index",
+			"style": {
+				"navigationBarTitleText": "预约记录"
+			}
+		},
+		{
+			"path": "pages/patientManage/index",
+			"style": {
+				"navigationBarTitleText": "就诊人管理"
+			}
+		},
+		{
+			"path": "pages/login/login",
+			"style": {
+				"navigationBarTitleText": "登录"
+			}
+		},
+		{
+			"path": "pages/register/register",
+			"style": {
+				"navigationBarTitleText": "添加就诊人"
+			}
+		},
+		{
+			"path": "pages/complateInfo/index",
+			"style": {
+				"navigationBarTitleText": "完善个人信息"
+			}
+		},
+		{
+			"path": "pages/search/search",
+			"style": {
+				"navigationBarTitleText": "搜索"
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#fff",
+		"backgroundColor": "#fff"
+	},
+	"tabBar": {
+	    "color": "#7A7E83",
+	    "selectedColor": "#d3c09d",
+	    "borderStyle": "black",
+	    "backgroundColor": "#ffffff",
+	    "list": [{
+	        "pagePath": "pages/tabBar/skip/skip",
+			"iconPath": "static/tab/order.png",
+			"selectedIconPath": "static/tab/orderSelect.png",
+	        "text": "预约"
+	    }, {
+	        "pagePath": "pages/tabBar/mine/mine",
+			"iconPath": "static/tab/mine.png",
+			"selectedIconPath": "static/tab/mineSelect.png",
+	        "text": "我的"
+	    }]
+	},
+	"condition" : { //模式配置，仅开发期间生效
+		"current": 0, //当前激活的模式(list 的索引项)
+		"list": [
+			{
+				"name": "", //模式名称
+				"path": "", //启动页面，必选
+				"query": "" //启动参数，在页面的onLoad函数里面得到
+			}
+		]
+	}
+}

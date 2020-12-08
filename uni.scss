@@ -1,0 +1,30 @@
+/* 行为相关颜色 */
+$color-primary: #00a0d0; 
+$color-warning: #f0ad4e;
+$color-error: #dd524d;
+$color-shallow: #4d5c74; // 浅色 (介绍)
+$color-deep: #021a40; // 深色
+
+/* 文字基本颜色 */
+$base-color: #333; // 基本色 (名字, 职位)
+$title-color: #6a6a6a; // 注意事项小标题
+$grey-color: #8f8f8f; // 辅助色 
+
+/* 阴影色 */
+$bs-color: #666;
+
+/* 边框色 */
+$bc-color: #c8c7cc;
+
+/* 圆角尺寸 */
+$br-base: 12rpx;
+
+/* 背景色 */
+$bgc-base: #eee;
+
+/* 面板相关字体 */
+$fs-32: 32rpx; // 名字
+$fs-30: 30rpx; // 名字
+$fs-28: 28rpx; // 馆名
+$fs-26: 26rpx; // 职位
+$fs-24: 24rpx; // 介绍
