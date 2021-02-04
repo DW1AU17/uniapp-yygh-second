@@ -1,0 +1,49 @@
+@charset "UTF-8";
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 阴影色 */
+/* 边框色 */
+/* 圆角尺寸 */
+/* 背景色 */
+/* 面板相关字体 */
+.arrow.data-v-1b6499d0 {
+  width: 100px;
+  color: #fff;
+  text-align: center;
+  -webkit-animation: move-data-v-1b6499d0 800ms infinite forwards;
+          animation: move-data-v-1b6499d0 800ms infinite forwards;
+  position: fixed;
+  bottom: 30%;
+  right: 11%;
+}
+.arrow image.data-v-1b6499d0 {
+  width: 125px;
+  height: 125px;
+  -webkit-transform: rotate(-130deg);
+          transform: rotate(-130deg);
+}
+@-webkit-keyframes move-data-v-1b6499d0 {
+0% {
+    bottom: 30%;
+}
+50% {
+    bottom: 22%;
+}
+100% {
+    bottom: 30%;
+    display: none;
+}
+}
+@keyframes move-data-v-1b6499d0 {
+0% {
+    bottom: 30%;
+}
+50% {
+    bottom: 22%;
+}
+100% {
+    bottom: 30%;
+    display: none;
+}
+}
+

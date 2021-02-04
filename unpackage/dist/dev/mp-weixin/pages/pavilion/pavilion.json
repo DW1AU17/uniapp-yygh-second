@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "选择医馆",
+  "usingComponents": {
+    "pav-panel": "/pages/pavilion/components/pav-panel"
+  }
+}

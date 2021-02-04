@@ -1,29 +1,31 @@
 <template>
 	<view class="login-page">
 		<view class="login-header">
-			<img src="@/static/pic.jpg" mode="aspectFill" class="cus-image"></img>
+			<img src="../../static/ui/safe.png" alt="">
+			<view>绑定手机号登录</view>
 		</view>
-		<view class="cus-form">
-			<form>
-				<view class="cus-form-item">
-					<view class="cus-title">手机号</view>
-					<input class="cus-input" v-model="ruleForm.phoneNumber" placeholder="请输入手机号" />
-				</view>
-				<view class="cus-form-item">
-					<view class="cus-title">验证码</view>
-					<input class="cus-input flex1" v-model="ruleForm.verificationCode" placeholder="请输入" />
-					<view class="verification">
-						<span v-if="vcDisabled" class="orange-thin">获取验证码</span>
-						<span v-else>
-							<span v-if="vcBtnChange" class="orange" @tap="countDown">获取验证码</span>
-							<span v-else class="dsb-color">{{countdown}}</span>
-						</span>
+		<view class="cus-form border-box">
+			<view class="border-box-inner gradient">
+				<form>
+					<view class="cus-form-item">
+						<input class="cus-input" v-model="ruleForm.phoneNumber" placeholder="请输入您的手机号" />
 					</view>
-				</view>
-			</form>
+					<view class="cus-form-item">
+						<input class="cus-input flex1" v-model="ruleForm.verificationCode" placeholder="请输入验证码" />
+						<text class="vertical-bar"></text>
+						<view class="verification">
+							<span v-if="vcDisabled" class="orange-thin">获取验证码</span>
+							<span v-else>
+								<span v-if="vcBtnChange" class="orange" @tap="countDown">获取验证码</span>
+								<span v-else class="dsb-color">{{countdown}}</span>
+							</span>
+						</view>
+					</view>
+				</form>
+			</view>
 		</view>
 		<view class="cus-footer">
-			<button type="default" class="cus-button" @tap="formSubmit">确认</button>
+			<button type="default" class="btn-footer" @tap="formSubmit">确认</button>
 		</view>
 	</view>
 </template>
@@ -50,8 +52,10 @@
 				type: ''
 			}
 		},
-		onShow({ type }) {
-			this.type = type
+		onLoad(option) {
+			if (Object.keys(option).length) {
+				this.type = option.type
+			}
 		},
 		methods: {
 			...mapMutations(['login', 'setPatientInfo', 'setPatientList']),
@@ -73,16 +77,18 @@
 						/* 设置患者信息 */
 						this.setPatientInfo(res.data)
 						/* 获取/设置就诊人列表 */
-						let patRes = getPatientList({ userId: res.data.id })
-						setPatientList(patRes.data)
+						let patRes = await getPatientList({ userId: res.data.id })
+						this.setPatientList(patRes.data)
 						if (!idCard) {
-							uni.navigateTo({
+							// 补全信息
+							uni.redirectTo({
 								url: `/pages/complateInfo/index?p=${phoneNumber}&id=${id}&type=${this.type}`
 							})
 						} else {
+							
 							if (this.type) {
 								uni.switchTab({
-									url: '/pages/tabBar/subscribe/subscribe'
+									url: `/pages/tabBar/mine/mine`
 								})
 							} else {
 								uni.navigateBack()
@@ -132,59 +138,63 @@
 </script>
 
 <style lang="scss">
-	@mixin bt-1 {
-		border-bottom: 1px solid #ccc; 
-	}
-	.flex1 {
-		flex: 1;
-	}
-	.dsb-color {
-		color: #ffd180;
-	}
-	.orange {
-		color: orange;
-	}
-	.orange-thin {
-		color: #ffcda0;
-	}
 	.login-page {
 		height: 100%;
-		background-color: #eee;
+		padding: 30rpx;
 		.login-header {
-			height: 100px;
-			.cus-image {
-				width: 100%;
-				height: 100%;
-				vertical-align: bottom;
+			text-align: center;
+			img {
+				height: 71rpx;
+				width: 64rpx;		
+				margin-top: 60rpx;
+			}
+			view {
+				color: $s-color;
+				font-size: 24rpx;
+				margin: 30rpx 0;
 			}
 		}
 		.cus-form {
 			background-color: #fff;
-			padding-left: 10px;
-			@include bt-1
-			.verification {
-				border-left: 1px solid #ccc;
-				padding: 0 5px 0 15px;
-			}	
+			>view {
+				padding: 20rpx 0 40rpx 0;
+			}
+			.cus-form-item {
+				display: flex;
+				align-items: center;
+				margin: 0 38rpx;
+				padding: 13rpx 0;
+				font-size: 28rpx;
+				height: 80rpx;
+				line-height: 80rpx;
+				border-bottom: 1px solid #eeedea;
+				.cus-input {
+					flex: 1;
+				}
+				// 竖线
+				.vertical-bar {
+					height: 100%;
+					width: 1px;
+					background-color: #eeedea;
+					margin-right: 20rpx;
+				}
+				.verification {
+					color: #666;
+					width: 180rpx;
+					text-align: center;
+					.orange-thin {
+						color: #999;
+					}
+				}
+			}
 		}
 		.cus-footer {
-			padding: 10px;
+			margin-top: 46rpx;
 		}
 	}
-	.cus-form-item {
-		display: flex;
-		align-items: center;
-		padding: 10px;
-		@include bt-1
-		&:last-child {
-			border-bottom: none;
-		}
-		.cus-title {
-			min-width: 90px;
-			font-size: 16px;
-		}
-		.cus-input {
-			
-		}
+	.uni-input-placeholder {
+		font-size: 28rpx;
+		color: #ccc;
 	}
+	
 </style>

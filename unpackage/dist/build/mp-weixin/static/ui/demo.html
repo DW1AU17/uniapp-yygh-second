@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title></title>
+	<style>
+		.box {
+			width: 400px;
+			margin: 0 auto;
+			position: relative;
+		}
+		.box::before,
+		.box::after {
+			content: '';
+			position: absolute;
+			right: 0;
+			left: 0;
+			height: 15px;
+			background: url(./box-top.png) no-repeat;
+			background-size: 100%;
+		}
+		.box::before {
+			top: 0;
+		}
+		.box::after {
+			bottom: 0;
+			transform: rotate(180deg);
+		}
+		.box-inner {
+			position: relative;
+			height: 100px;
+		}
+		.box-inner::before,
+		.box-inner::after {
+			content: '';
+			position: absolute;
+			left: 0;
+			top: 18px;
+			bottom: 18px;
+			width: 2px;
+			background: url(./box-left.png) repeat;
+			background-size: 100%;
+		}
+		.box-inner::after {
+			left: auto;
+			right: 0;
+			transform: rotate(180deg);
+		}
+	</style>
+</head>
+<body>
+	<div class="box">
+		<div class="box-inner">
+			<div>123</div>
+			<div>456</div>
+			<div>789</div>
+		</div>
+	</div>
+</body>
+</html>

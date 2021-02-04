@@ -1,0 +1,74 @@
+@charset "UTF-8";
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 阴影色 */
+/* 边框色 */
+/* 圆角尺寸 */
+/* 背景色 */
+/* 面板相关字体 */
+.search-page {
+  padding: 20rpx 30rpx;
+}
+.search-page .search .uni-searchbar {
+  padding: 0;
+}
+.search-page .history > view {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+}
+.search-page .history .title {
+  color: #666;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  margin: 10rpx 0;
+}
+.search-page .history .title .delete {
+  width: 40rpx;
+  height: 40rpx;
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAMAAAC7IEhfAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyFpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTQyIDc5LjE2MDkyNCwgMjAxNy8wNy8xMy0wMTowNjozOSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozNkFDRDNFQjVBMTcxMUVCQUUyM0RGNEZERTFDREFCNiIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozNkFDRDNFQzVBMTcxMUVCQUUyM0RGNEZERTFDREFCNiI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjM2QUNEM0U5NUExNzExRUJBRTIzREY0RkRFMUNEQUI2IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjM2QUNEM0VBNUExNzExRUJBRTIzREY0RkRFMUNEQUI2Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+SPx/RgAAAMBQTFRF////1tbWX19ffX19qqqqtra2eXl5ampqYmJiNTU1goKCUlJSYGBglpaWzc3NQUFBOjo6QkJCPDw8VlZW7u7u6+vr5eXlWVlZdnZ2XFxcNjY29PT0pqam39/f/Pz8ubm59fX1uLi4zs7Op6enjY2NSkpK/f39+/v7enp6pKSkMDAwjIyM9vb2vr6+urq63NzcZ2dnm5ubiIiIwsLCR0dHf39/z8/P8/PzoqKi4ODgkpKSrq6u3t7ebm5uOTk5////ZVh22AAAAEB0Uk5T////////////////////////////////////////////////////////////////////////////////////AMJ7sUQAAAECSURBVHja7NTZUoMwGIbhFKUNXSGIbUlbaStL61b3Pd/935WJgjokBcejjuN7kMn8PCdkIAQ/jOwSJO/VQ7tFZZunWjhad3zfX3u18NY5lGsnNsPLsZVHPWeqYNjtFqNR8gXbbFB0Yx2oQfw5GAy/QXDOI/5RUgx4Pkx+eY6LzYX+9L71rMEH1waCnnrl84lcol4DeAmbGpyII2DOlBmzU+COnQBTZ88MbaEg9SKgL6rgXCwLuBDH//AvQ9tdya3FuPwo3KsK2I/P5DYbpsBjvKyAUD8WUo58ux2WMsGVuNZhYID7Ic2apbJXp63BgLqG/IZ+95BZOiuXkt28mrf0JsAAvLNHbrx2A1sAAAAASUVORK5CYII=) no-repeat;
+  background-size: 100%;
+}
+.search-page .history .his-item {
+  -webkit-flex-wrap: wrap;
+          flex-wrap: wrap;
+}
+.search-page .history .his-item text {
+  display: inline-block;
+  height: 30px;
+  line-height: 30px;
+  padding: 0 12px;
+  -webkit-border-radius: 15px;
+          border-radius: 15px;
+  margin-bottom: 5px;
+  margin-right: 7px;
+  font-size: 14px;
+  color: #6a6a6a;
+  border: 1px solid #bb8d4c;
+  background-color: #fff;
+}
+.search-page .search-result {
+  padding-bottom: 30rpx;
+  overflow-y: scroll;
+}
+.search-page .search-result .title {
+  text-align: center;
+  color: #666;
+}
+.search-page .search-result .sub-list .sub-item {
+  padding: 8px 20rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+}
+.search-page .search-result .sub-list .sub-item:last-child {
+  border-bottom: none;
+}
+

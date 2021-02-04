@@ -1,145 +1,197 @@
 <template>
 	<view class="reg-page">
-		<view class="reg-header">
-			<img src="@/static/pic.jpg" class="cus-image"></img>
-		</view>
-		<view class="cus-form">
-			<form>
-				<view class="cus-form-item">
-					<view class="cus-title">姓名</view>
-					<input class="cus-input" v-model="ruleForm.patName" focus placeholder="请输入姓名" />
-				</view>
-				<view class="cus-form-item">
-					<view class="cus-title">手机号</view>
-					<input class="cus-input" v-model="ruleForm.phoneNumber" placeholder="请输入手机号" />
-				</view>
-				<view class="cus-form-item">
-					<view class="cus-title">身份证</view>
-					<input class="cus-input" v-model="ruleForm.idCard" placeholder="请输入身份证" />
-				</view>
-			</form>
-		</view>
-		<view class="cus-footer">
-			<button type="default" class="cus-button" @tap="formSubmit">确认</button>
+		<view class="cus-form border-box">
+			<view class="border-box-inner gradient">
+				<form>
+					<view class="cus-form-item">
+						<view class="cus-title">姓名</view>
+						<input class="cus-input" :disabled="type === 'edit'" v-model="ruleForm.userName" focus placeholder="请输入姓名" />
+					</view>
+					<view class="cus-form-item">
+						<view class="cus-title">手机号</view>
+						<input class="cus-input" v-model="ruleForm.phoneNumber" placeholder="请输入手机号" />
+					</view>
+					<view class="cus-form-item">
+						<view class="cus-title">证件类型</view>
+						<picker @change="bindPickerChange" :value="ruleForm.cardType" :range="array" range-key="name">
+							<view class="uni-input">{{array[ruleForm.cardType].name}}</view>
+						</picker>
+					</view>
+					<view class="cus-form-item">
+						<view class="cus-title">身份证</view>
+						<input class="cus-input" :disabled="type === 'edit'" v-model="ruleForm.cardCode" placeholder="请输入身份证" />
+					</view>
+				</form>
+				<view class="btn-delete" @tap="delPatient" v-show="type === 'edit'">解绑</view>
+			</view>
 		</view>
 		<view class="remind">
 			<view class="title">温馨提示</view>
 			<view class="single">
-				<view>1. 就诊人姓名, 证件号码将用于医馆建档信息匹配, 请输入正确的个人信息</view>
-				<view>2. 手机号将用于短信(电话)通知, 请输入正确的手机号</view>
-				<view>3. 最多可添加5位就诊人</view>
+				<view>1. 就诊人姓名, 证件号码将用于医馆建档信息匹配, 请输入正确的个人信息; 手机号将用于短信(电话)通知, 请输入正确的手机号</view>
+				<view>2. 最多可添加5位就诊人</view>
 			</view>
 		</view>
+		
+		<view class="cus-footer">
+			<button type="default" class="btn-footer" @tap="formSubmit">保存</button>
+		</view>
+		
 	</view>
 </template>
 
 <script>
 	import validateForm from '@/common/utils/validateForm.js'
-	import { addPatient } from '@/common/api/patient.js'
+	import { addPatient, removePatient } from '@/common/api/patient.js'
 	import { mapState, mapMutations } from 'vuex'
 	let rules = [
-		{ prop: 'patName' },
+		{ prop: 'userName' },
 		{ prop: 'phoneNumber' },
-		{ prop: 'idCard' },
+		{ prop: 'cardCode' },
 	]
 	export default {
 		data() {
 			return {
 				ruleForm: {
-					patName: '',
+					userName: '',
 					phoneNumber: '',
-					idCard: '',
-					userId: ''
-				}
+					cardCode: '',
+					cardType: '0',
+					userId: '',
+					id: ''
+				},
+				type: 'add',
+				array: [
+					{ dicCode: "0", name: "身份证" },
+					{ dicCode: "3", name: "其他（护照，港澳证，台胞证）" },
+				]
 			}
 		},
 		onLoad() {
 			this.ruleForm.userId = this.patientInfo.id
+			// 事件通道
+			let eventChannel = this.getOpenerEventChannel()
+			// 修改信息
+			eventChannel.on('editPatientInfoFromManagePage', data => {
+				if (data) {
+					console.log(data)
+					let { userName, phoneNumber, cardCode, cardType, userId, id } = data
+					this.type = 'edit'
+					this.ruleForm = { userName, phoneNumber, cardCode, cardType, userId, id }
+					uni.setNavigationBarTitle({
+					    title: '修改就诊人信息'
+					});
+				}
+			})
 		},
 		computed: {
 			...mapState(['patientInfo'])
 		},
 		methods: {
-			...mapMutations(['addPatient']),
+			...mapMutations(['addPatient', 'deletePatient']),
 			async formSubmit() {
-				let { ret, msg } = validateForm(this.ruleForm, rules)
 				let data = this.ruleForm
+				if (data.cardType != 0) { // 其他证件类型不校验
+					rules = rules.slice(0,2)
+					if (!data.cardCode) {
+						return this.errorAlert('证件号码不能为空')
+					}
+				}
+				let { ret, msg } = validateForm(data, rules)
 				if (ret) {
 					let res = await addPatient(data)
 					if (res.code == 0) {
 						/* 添加信息到store中 */
-						addPatient(data)
+						this.addPatient(data)
 						this.successAlert('添加成功')
-						uni.navigateBack({ delta: 1 })
+						setTimeout(() => {
+							uni.navigateBack({ delta: 1 })
+						}, 500)
 					} 
 				} else {
 					this.errorAlert(msg)
 				}
 			},
+			delPatient() {
+				let { id } = this.ruleForm
+				let that = this
+				uni.showModal({
+					title: '确定要解绑就诊人?',
+					async success(res) {
+						if (res.confirm) {
+							let data = { id }
+							let res = await removePatient(data)
+							if (res.code == 0) {
+								that.successAlert('删除成功')
+								/* 删除store中的记录 */
+								that.deletePatient({ id })
+								uni.navigateBack()
+							} 
+						}
+					}
+				})
+			},
+			bindPickerChange(e) {
+				this.ruleForm.cardType = e.target.value
+			}
 		}
 	}
 </script>
 
 <style lang="scss">
-	@mixin bt-1 {
-		border-bottom: 1px solid #ccc; 
-	}
-	.flex1 {
-		flex: 1;
-	}
-	.dsb-color {
-		color: #ffd180;
-	}
-	.orange {
-		color: orange;
-	}
 	.reg-page {
 		height: 100%;
-		background-color: #eee;
-		.reg-header {
-			height: 100px;
-			.cus-image {
-				width: 100%;
-				height: 100%;
-				vertical-align: bottom;
+		padding: 30rpx;
+		.cus-form {
+			position: relative;
+			>view {
+				padding: 20rpx 0;
+			}
+			.btn-delete {
+				position: absolute;
+				top: 30rpx;
+				right: 32rpx;
+				padding: 0 10rpx;
+				border-radius: 3px;
+				border: 1px solid $s-color;
+				line-height: 1.6;
+
+			}
+			.cus-form-item {
+				display: flex;
+				align-items: center;
+				font-size: 30rpx;
+				padding: 0 50rpx;
+				line-height: 70rpx;
+				&:last-child {
+					border-bottom: none;
+				}
+				.cus-title {
+					color: #666;
+					width: 170rpx;
+					font-weight: 700;
+				}
+				.cus-input {
+					
+				}
 			}
 		}
-		.cus-form {
-			background-color: #fff;
-			padding-left: 10px;
-			@include bt-1
-			.verification {
-				border-left: 1px solid #ccc;
-				padding: 0 5px 0 15px;
-			}	
+		.remind {
+			padding: 20rpx 0;
+			font-size: 24rpx;
+			.title {
+				color: #666;
+			}
+			.single {
+				color: #999;
+			}
 		}
-		.cus-footer {
-			padding: 10px;
-		}
+		// 底部按钮
 	}
-	.cus-form-item {
-		display: flex;
-		align-items: center;
-		padding: 10px;
-		@include bt-1
-		&:last-child {
-			border-bottom: none;
-		}
-		.cus-title {
-			min-width: 90px;
-		}
-		.cus-input {
-			
-		}
+	.uni-input-placeholder {
+		font-size: 28rpx;
+		color: #ccc;
 	}
-	.remind {
-		padding: 20rpx;
-		font-size: 26rpx;
-		.title {
-			color: $title-color;
-		}
-		.single {
-			color: $grey-color;
-		}
-	}
+	
+	
 </style>

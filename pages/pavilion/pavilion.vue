@@ -1,7 +1,9 @@
 <template>
 	<view class="pavilion-page">
-		<view class="main">
-			<pav-panel :data="pavList" @jump="goSubscribePage"/>
+		<view class="main border-box">
+			<view class="border-box-inner">
+				<pav-panel :list="pavList" @jump="goSubscribePage"/>
+			</view>
 		</view>
 		
 		<view class="remind">
@@ -15,13 +17,7 @@
 </template>
 
 <script>
-	let pavList = [
-		{ id: 330003, sffName: '东新馆 (暂未开放)', sffSummary: '位于东新路737号', img: '/static/pav/dxg.jpg'},
-		{ id: 330004, sffName: '环西馆', sffSummary: '位于环城西路92号', img: '/static/pav/hxg.jpg'},
-		{ id: 330005, sffName: '城站馆 (暂未开放)', sffSummary: '位于郭东园巷2号', img: '/static/pav/czg.jpg'},
-		{ id: 330002, sffName: '武林馆 (暂未开放)', sffSummary: '位于体育路474号', img: '/static/pav/wlg.jpg'},
-		{ id: 330001, sffName: '城西馆 (暂未开放)', sffSummary: '位于古墩路632号同人精华', img: '/static/pav/cxg.jpg'},
-	]
+	import { pavList } from '@/common/utils/index'
 	import pavPanel from './components/pav-panel'
 	export default {
 		components: {
@@ -33,9 +29,10 @@
 			}
 		},
 		methods: {
-			goSubscribePage() {
+			goSubscribePage(data) {
+				let { id, orgCode } = data
 				uni.navigateTo({
-					url: '/pages/subscribe/subscribe'
+					url: `/pages/subscribe/subscribe?orgCode=${orgCode}&hospitalId=${id}`
 				})
 			}
 		}
@@ -44,18 +41,16 @@
 
 <style lang="scss">
 	.pavilion-page {
-		background-color: $bgc-base;
-		.main {
-			background-color: #fff;
-		}
+		padding: 30rpx;
+		height: calc(100% - 60rpx);
 		.remind {
-			padding: 20rpx;
 			font-size: 26rpx;
+			margin-top: 10rpx;
 			.title {
-				color: $title-color;
+				color: #666;
 			}
 			.single {
-				color: $grey-color;
+				color: #999;
 			}
 		}
 	}

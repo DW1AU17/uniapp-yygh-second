@@ -5,6 +5,8 @@
 page {
 	font-family: 'Microsoft YaHei';
 	height: 100%;
+	/* background: url(https://www.zjgoshine.com:59001/resource/background.png); */
+	/* background-color: #eee; */
 }
 uni-page-body {
 	/* font-size: 16px!important; */
@@ -16,20 +18,38 @@ uni-page-head {
 page>view {
 	height: 100%;
 }
-.fs13 {
-	font-size: 13px;
+.fs36 {
+	font-size: 36rpx;
 }
-.fs14 {
-	font-size: 14px;
+.fs32 {
+	font-size: 32rpx;
 }
-.fs15 {
-	font-size: 15px;
+.fs30 {
+	font-size: 30rpx;
 }
-.fs16 {
-	font-size: 16px;
+.fs28 {
+	font-size: 28rpx;
+}
+.fs26 {
+	font-size: 26rpx;
+}
+.fs24 {
+	font-size: 24rpx;
+}
+.fs23 {
+	font-size: 23rpx;
+}
+.fs22 {
+	font-size: 22rpx;
+}
+.fs20 {
+	font-size: 20rpx;
 }
 .fs18 {
-	font-size: 18px;
+	font-size: 18rpx;
+}
+.fs14 {
+	font-size: 14rpx;
 }
 .mr5 {
 	margin-right: 5px;
@@ -46,11 +66,20 @@ page>view {
 .fwb {
 	font-weight: 700;
 }
+.base-color {
+	color: #bb8d4c;
+}
+.fc999 {
+	color: #999;
+}
 .fc666 {
 	color: #666;
 }
 .fc444 {
 	color: #444;
+}
+.fc000 {
+	color: #000;
 }
 .red {
 	color: red;
@@ -64,13 +93,23 @@ page>view {
 .ta-left {
 	text-align: left;
 }
+.lh1 {
+	line-height: 1;
+}
+
 .uni-page-head {
 	/* box-shadow: 0px 1px 6px 1px #666; */
+}
+.hidden {
+	display: none!important;
 }
 
 .cus-button {
 	color: #fff !important;
-	background-color: #D3C7B7 !important;
+	background-color: #d09c5b !important;
+}
+.cus-button.button-hover {
+	background-color: #d6b995 !important;
 }
 .text-line {
 	text-overflow: -o-ellipsis-lastline;
@@ -92,4 +131,82 @@ page>view {
 }
 img {
 	vertical-align: bottom;
+}
+
+/* 
+ * 默认带边框的盒子 (结构)
+ * <div class="border-box">
+ * 	  <div class="border-box-inner"></div>
+ * </div>
+ */
+.border-box {
+	margin: 0 auto;
+	position: relative;
+}
+.border-box::before,
+.border-box::after {
+	content: '';
+	position: absolute;
+	right: 0;
+	left: 0;
+	height: 26rpx;
+	background: url(/static/ui/box-top.png) no-repeat;
+	background-size: 100%;
+	z-index: 9;
+}
+.border-box::before {
+	top: 0;
+}
+.border-box::after {
+	bottom: 0;
+	transform: rotate(180deg);
+}
+.border-box-inner {
+	position: relative;
+	height: 100%;
+}
+.border-box-inner::before,
+.border-box-inner::after {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 36rpx;
+	bottom: 36rpx;
+	width: 2rpx;
+	background: url(/static/ui/box-left.png) repeat;
+	background-size: 100%;
+}
+.border-box-inner::after {
+	left: auto;
+	right: 0;
+	transform: rotate(180deg);
+}
+
+/* 底部按钮统一样式 */
+.fixed-footer {
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	height: 100rpx;
+	line-height: 100rpx;
+	display: flex;
+	align-items: center;
+}
+.btn-footer {
+	width: 80%;
+	height: 60rpx;
+	line-height: 60rpx;
+	font-size: 32rpx;
+	border-radius: 40rpx;
+	margin-top: 50rpx;
+	background-color: #bb8d4c!important;
+	color: #fff!important;
+}
+
+/* 渐变 */
+.gradient {
+	/* background-image: linear-gradient(180deg,#fff 0%,#fff 25%,#fefaf6 50%,#fdf9f3 75%,#fdf8f1 90%); */
+	background-image: linear-gradient(180deg,#fff 0%,#fff 25%,#fffdfb 75%,#fffbf7 90%);
+	/* background-color: #fff; */
 }

@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "搜索",
+  "usingComponents": {
+    "search": "/components/uni-search-bar/uni-search-bar",
+    "doctor-panel": "/components/doctor-panel/doctor-panel"
+  }
+}

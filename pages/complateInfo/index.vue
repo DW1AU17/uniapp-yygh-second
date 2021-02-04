@@ -1,27 +1,40 @@
 <template>
 	<view class="complate-page">
-		<view class="complate-header">
-			<img src="@/static/pic.jpg" mode="aspectFill" class="cus-image"></img>
+		<view class="cus-form border-box">
+			<view class="border-box-inner gradient">
+				<form>
+					<view class="cus-form-item">
+						<view class="cus-title">姓名</view>
+						<input class="cus-input" v-model="ruleForm.username" focus placeholder="请输入姓名" />
+					</view>
+					<view class="cus-form-item">
+						<view class="cus-title">手机号</view>
+						<input class="cus-input" v-model="ruleForm.phoneNumber" placeholder="请输入手机号" disabled/>
+					</view>
+					<view class="cus-form-item">
+						<view class="cus-title">证件类型</view>
+						<picker @change="bindPickerChange" :value="ruleForm.cardType" :range="array" range-key="name">
+							<view class="uni-input">{{array[ruleForm.cardType].name}}</view>
+						</picker>
+					</view>
+					<view class="cus-form-item">
+						<view class="cus-title">身份证</view>
+						<input class="cus-input" v-model="ruleForm.idCard" placeholder="请输入身份证" />
+					</view>
+				</form>
+			</view>
 		</view>
-		<view class="cus-form">
-			<form>
-				<view class="cus-form-item">
-					<view class="cus-title">姓名</view>
-					<input class="cus-input" v-model="ruleForm.username" focus placeholder="请输入姓名" />
-				</view>
-				<view class="cus-form-item">
-					<view class="cus-title">手机号</view>
-					<input class="cus-input" v-model="ruleForm.phoneNumber" placeholder="请输入手机号" disabled/>
-				</view>
-				<view class="cus-form-item">
-					<view class="cus-title">身份证</view>
-					<input class="cus-input" v-model="ruleForm.idCard" placeholder="请输入身份证" />
-				</view>
-			</form>
+		<view class="remind">
+			<view class="title">预约实名制</view>
+			<view class="single">
+				<view>预约挂号需要您提供真实姓名, 有效身份证件号码</view>
+			</view>
 		</view>
+		
 		<view class="cus-footer">
-			<button type="default" class="cus-button" @tap="formSubmit">确认</button>
+			<button type="default" class="btn-footer" @tap="formSubmit">保存</button>
 		</view>
+		
 	</view>
 </template>
 
@@ -39,100 +52,112 @@
 				ruleForm: {
 					username: '',
 					phoneNumber: '',
+					cardType: '0',
 					idCard: '',
 					id: ''
 				},
-				type: ''
+				type: '',
+				array: [
+					{ dicCode: "0", name: "身份证" },
+					{ dicCode: "3", name: "其他（护照，港澳证，台胞证）" },
+				]
 			}
 		},
 		onLoad({ p, id, type }) {
 			this.ruleForm.phoneNumber = p
 			this.ruleForm.id = id
 			this.type = type
+			this.errorAlert('请完善信息')
 		},
 		computed: {
-			...mapState('patientInfo')
+			...mapState(['patientInfo'])
 		},
 		methods: {
-			...mapMutations(['setPatientInfo']),
+			...mapMutations(['login', 'setPatientInfo', 'setPatientList']),
 			async formSubmit() {
-				let { ret, msg } = validateForm(this.ruleForm, rules)
+				let data = this.ruleForm
+				if (data.certifiNum != 0) { // 其他证件类型不校验
+					rules = rules.slice(0,1)
+				}
+				let { ret, msg } = validateForm(data, rules)
 				if (ret) {
-					let data = this.ruleForm
+					this.showLoging()
+					
 					// 调接口
-					let { code, message } = await updatePatient(data)
+					let { code } = await updatePatient(data)
 					if (code == 0) {
-						let patient = this.patientInfo
 						/* 初始化就诊人接口 */
-						let patRes = await getPatientList({ userId: patient.id })
+						let patRes = await getPatientList({ userId: this.ruleForm.id })
 						/* 当前用户信息存在store中 */
-						this.setPatientInfo({ ...patient, ...data })
+						let patientInfo = this.patientInfo
+						let { idCard, username } = data
+						patientInfo = { ...patientInfo, idCard, username }
+						this.login()
+						this.setPatientInfo(patientInfo)
+						this.setPatientList(patRes.data || [])
+						this.successAlert('登录成功')
 						if (this.type) {
 							uni.switchTab({
-								url: '/pages/tabBar/mine/mine'
+								url: `/pages/tabBar/${this.type}/${this.type}`
 							})
 						} else {
-							uni.navigateBack({ delta: 2 })
+							console.log(this.type)
+							uni.navigateBack({ delta: 1 })
 						}
 					}
+					uni.hideLoading()
 				} else {
-					this.errorAlert(message)
+					this.errorAlert(msg)
 				}
+			},
+			bindPickerChange(e) {
+				this.ruleForm.certifiNum = e.target.value
 			}
 		}
 	}
 </script>
 
 <style lang="scss">
-	@mixin bt-1 {
-		border-bottom: 1px solid #ccc; 
-	}
-	.flex1 {
-		flex: 1;
-	}
-	.dsb-color {
-		color: #ffd180;
-	}
-	.orange {
-		color: orange;
-	}
 	.complate-page {
 		height: 100%;
-		background-color: #eee;
-		.complate-header {
-			height: 100px;
-			.cus-image {
-				width: 100%;
-				height: 100%;
-				vertical-align: bottom;
-			}
-		}
+		padding: 30rpx;
 		.cus-form {
 			background-color: #fff;
-			padding-left: 10px;
-			@include bt-1
-			.verification {
-				border-left: 1px solid #ccc;
-				padding: 0 5px 0 15px;
-			}	
+			>view {
+				padding: 20rpx 0;
+			}
+			.cus-form-item {
+				display: flex;
+				align-items: center;
+				font-size: 28rpx;
+				padding: 0 50rpx;
+				line-height: 62rpx;
+				&:last-child {
+					border-bottom: none;
+				}
+				.cus-title {
+					color: #666;
+					width: 170rpx;
+				}
+				.cus-input {
+					
+				}
+			}
 		}
-		.cus-footer {
-			padding: 10px;
+		.remind {
+			padding: 20rpx 0;
+			font-size: 24rpx;
+			.title {
+				color: #666;
+			}
+			.single {
+				color: #999;
+			}
 		}
+		// 底部按钮
 	}
-	.cus-form-item {
-		display: flex;
-		align-items: center;
-		padding: 10px;
-		@include bt-1
-		&:last-child {
-			border-bottom: none;
-		}
-		.cus-title {
-			min-width: 90px;
-		}
-		.cus-input {
-			
-		}
+	.uni-input-placeholder {
+		font-size: 28rpx;
+		color: #ccc;
 	}
 </style>

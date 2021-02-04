@@ -26,3 +26,11 @@ export function login(data) {
 	return axios('loginFromApp', data, BASE_SUFFIX)
 }
 
+
+/**
+ * 小程序登录
+ */
+let WECHAT_URL = 'wechat/'
+export function wechatLogin(data) {
+	return axios('handlerWeChatUserinfo', data, WECHAT_URL)
+}

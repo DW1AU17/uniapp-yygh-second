@@ -1,0 +1,50 @@
+{
+	"description": "项目配置文件。",
+	"packOptions": {
+		"ignore": []
+	},
+	"setting": {
+		"urlCheck": false,
+		"checkSiteMap": false
+	},
+	"compileType": "miniprogram",
+	"libVersion": "",
+	"appid": "wx77c3aacbff45b6a7",
+	"projectname": "defaultDemo1",
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"current": -1,
+			"list": []
+		},
+		"gamePlugin": {
+			"current": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 0,
+			"list": [
+				{
+					"id": 0,
+					"name": "pages/video/video",
+					"pathName": "pages/video/video",
+					"query": "date=2021-02-03",
+					"scene": null
+				}
+			]
+		}
+	}
+}

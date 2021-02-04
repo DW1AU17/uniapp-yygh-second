@@ -1,0 +1,1 @@
+<view hidden="{{!(show)}}" class="arrow data-v-1b6499d0"><view class="text data-v-1b6499d0"></view><image src="/static/ui/sz.png" class="data-v-1b6499d0"></image></view>

@@ -1,0 +1,42 @@
+@charset "UTF-8";
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 阴影色 */
+/* 边框色 */
+/* 圆角尺寸 */
+/* 背景色 */
+/* 面板相关字体 */
+.auth-page {
+  text-align: center;
+  padding: 10px;
+}
+.auth-page .img {
+  margin-top: 190rpx;
+  margin-bottom: 178rpx;
+}
+.auth-page .img image {
+  width: 343rpx;
+  height: 333rpx;
+}
+.auth-page .title {
+  margin: 10px 0;
+}
+.auth-page button {
+  font-size: 28rpx;
+  width: 464rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  background-color: #bb8d4c;
+  -webkit-border-radius: 30rpx;
+          border-radius: 30rpx;
+}
+.auth-page button image {
+  width: 44rpx;
+  height: 36rpx;
+  vertical-align: sub;
+  margin-right: 18rpx;
+}
+.auth-page button.button-hover {
+  background-color: #bb8d4c;
+}
+

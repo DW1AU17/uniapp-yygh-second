@@ -2,48 +2,125 @@
 	<view class="mine-page">
 		<view class="mine-header">
 			<view class="head-portrait">
-				<img src="@/static/tab/mine.png">
+				<!-- #ifdef MP-WEIXIN -->
+				<image v-if="wechatUserInfo.avatarUrl" class="wechat" :src="wechatUserInfo.avatarUrl" mode="">
+				<button v-else class="head-pic" open-type="getUserInfo" @getuserinfo="mpGetUserInfo"></button>
+				<!-- #endif -->
+				<!-- #ifdef H5 -->
+				<image src="/static/ui/head.png" mode="">
+				<!-- #endif -->
+				<!-- <image src="/static/ui/head.png" mode=""> -->
 			</view>
-			<view v-if="hasLogin">{{patientInfo.username}}</view>
-			<view class="login" v-else @tap="goLoginPage">登录/注册</view>
+			<!-- #ifdef MP-WEIXIN -->
+				<button v-if="!hasLogin" class="login" open-type="getUserInfo" @getuserinfo="mpGetUserInfo">点击登录</button>
+				<view class="fs32 name" v-else>{{patientInfo.username || wechatUserInfo.nickName}}</view>
+			<!-- #endif -->
+			<!-- #ifdef H5 -->
+				<view v-if="!hasLogin" class="login" @tap="goLoginPage">点击登录</view>
+				<view class="fs32 name" v-else>{{patientInfo.username}}</view>
+			<!-- #endif -->
 		</view>
-		<view class="btn-box">
-			<view class="my-bookings" @tap="goRegRecordPage">
-				<img src="@/static/record.png">
-				<text>预约记录</text>
-			</view>
-			<view class="patient-manage" @tap="goPatManagePage">
-				<img src="@/static/manage.png">
-				<text>就诊人管理</text> 
-			</view>			
-			<view class="login-out" @tap="loginOut">
-				<img src="@/static/loginout.png">
-				<text>退出当前登录</text>
-			</view>						
+		<view class="btn-box border-box">
+			<view class="border-box-inner">
+				<view class="my-bookings gradient" @tap="goRegRecordPage">
+					<text>预约记录</text>
+					<image src="/static/ui/arrow-right.png">
+				</view>
+				<view class="patient-manage gradient" @tap="goPatManagePage">
+					<text>就诊人管理</text> 
+					<image src="/static/ui/arrow-right.png">
+				</view>	
+				<!-- <view class="patient-manage gradient" @tap="goAboutPage">
+					<text>关于桐君堂</text> 
+					<image src="/static/ui/arrow-right.png">
+				</view>	 -->
+				<!-- <view class="login-out" @tap="loginOut" hidden>
+					<text>退出当前登录</text>
+				</view> -->	
+				<!-- #ifdef MP-WEIXIN -->
+					<button v-if="!hasLogin" class="logout" open-type="getUserInfo" @getuserinfo="mpGetUserInfo"></button>
+				<!-- #endif -->
+				<!-- #ifdef H5 -->
+					<view v-if="!hasLogin" @tap="goLoginPage" class="logout"></view>
+				<!-- #endif -->
+			</view>		
 		</view>
 	</view>
 </template>
 
 <script>
 	import { mapState, mapMutations } from 'vuex'
+	import { wechatLogin } from '@/common/api/wechat'
+	import { judgeSessionKeyExpired, getOpenIdAndSessionKey } from '@/common/utils/wechat'
 	export default {
 		data() {
 			return {
-				patInfo: {},
-				isLogin: false
+				result: {},
+				source: 'wechat', // 来源
 			}
 		},
-		onShow() {
-			// 没登录先登录
-			// if (!this.hasLogin) this.goLoginPage()
-		},
 		computed: {
-			...mapState(['hasLogin', 'patientInfo'])
+			...mapState(['hasLogin', 'patientInfo', 'wechatUserInfo'])
 		},
 		methods: {
-			...mapMutations(['logout']),
+			...mapMutations(['logout', 'setWeChatToken', 'setWechatUserInfo']),
+			/**
+			 * 获取用户信息
+			 */
+			mpGetUserInfo(result) {
+				if (result.detail.errMsg !== 'getUserInfo:ok') { 
+					this.errorAlert('获取用户信息失败')
+				} else {
+					this.result = result.detail
+					// 保存小程序授权用户信息到store
+					this.setWechatUserInfo(result.detail.userInfo)
+					// 执行登录
+					if (!this.patientInfo.username) this.performLogin()
+				}
+			},
+			/**
+			 * 执行登录 (这边执行登录的都是未使用微信登录过的新用户)
+			 */
+			async performLogin() {
+				let that = this
+				// 判断sessionKey是否过期
+				let res = await judgeSessionKeyExpired()
+				if (res.code === 1) {
+					// 已过期, 重新调uni.login
+					let { data: { openId, sessionKey } } = await getOpenIdAndSessionKey()
+					let obj = { openId, sessionKey }
+					// 存到store中, 设置小程序token
+					this.setWeChatToken(obj)
+				}
+				let { phoneNumber, idCard, id} = this.patientInfo
+				if (phoneNumber && !idCard) {
+					// 完善信息
+					uni.navigateTo({
+						url: `/pages/complateInfo/index?p=${phoneNumber}&id=${id}&type=mine`
+					})
+				} else {
+					// 跳转到手机号登录页
+					uni.navigateTo({
+						url: '/pages/auth/auth?type=mine',
+						success(res) {
+							res.eventChannel.emit('loginDataFromMine', { data: that.result })
+						}
+					})
+				}
+			},
+			/**
+			 * 退出登录
+			 */
 			loginOut() {
-				this.logout()
+				let that = this
+				uni.showModal({
+					title: '确定要退出当前登录?',
+					async success(res) {
+						if (res.confirm) {
+							that.logout()
+						}
+					}
+				})
 			},
 			goLoginPage() {
 				uni.navigateTo({
@@ -59,57 +136,97 @@
 				uni.navigateTo({
 					url: '/pages/patientManage/index?type=mine'
 				})
-			}
+			},
+			goAboutPage() {
+				uni.navigateTo({
+					url: `/pages/about/about`
+				})
+			},
 		}
 	}
 </script>
 
 <style lang="scss">
-	@mixin bgcfff {
-		background-color: #fff;
-	}
+	$base-color: #bf9356;
 	.mine-page {
-		background-color: $bgc-base;
-		font-size: 18px;
+		padding: 0 30rpx;
+		overflow: hidden;
 		.mine-header {
+			// #ifdef H5
+			margin-top: 30px;
+			// #endif
+			// #ifdef MP-WEIXIN
+			margin-top: 75px;
+			// #endif
 			display: flex;
 			align-items: center;
-			padding: 10px;
-			@include bgcfff;
+			padding: 26rpx 14rpx;
 			.head-portrait {
-				border: 2px solid #18c2d4;
-				width: 66px;
-				height: 66px;
-				border-radius: 10px;
-				text-align: center;
-				line-height: 60px;
-				margin-right: 10px;
-				color: #fff;
-				img {
-					width: 70%;
-					height: 78%;
+				image, .head-pic {
+					width: 69rpx;
+					height: 77rpx;
+					margin-right: 14rpx;
+					transform: scale(1.3);
 				}
+				image {
+					&.wechat {
+						width: 77rpx;
+						border: 1px solid $s-color;
+					}
+				}
+				.head-pic {
+					background: url('/static/ui/head.png') no-repeat;
+					background-size: 100%;
+					&:after {
+						border: none;
+					}
+				}
+			}
+			.login {
+				color: $base-color;
+				border: 1px solid $base-color;
+				border-radius: 14rpx;
+				padding: 4rpx 12rpx;
+				line-height: 1.2;
+				font-size: 24rpx;
+				margin: -20rpx 0 0 20rpx;
+				background: transparent;
+				&.name {
+					
+				}
+			}
+			.name {
+				margin: -8rpx 0 0 18rpx;
 			}
 		}
 		.btn-box {
-			padding: 0px 10px;
-			@include bgcfff;
-			>view {
-				border-bottom: 1px solid #eee;
-				font-size: 16px;
-				padding: 10px 0;
-				img {
-					height: 22px;
-					width: 22px;
-					margin-right: 10px;
-					vertical-align: text-top;
+			position: relative;
+			.border-box-inner {
+				>view {
+					font-size: 32rpx;
+					color: #000;
+					padding: 0 46rpx;
+					display: flex;
+					align-items: center;
+					justify-content: space-between;
+					line-height: 100rpx;
+					image {
+						width: 13rpx;
+						height: 22rpx;
+					}
+					&:last-child {
+						padding-bottom: 0;
+					}
 				}
-				text {
-					color: $title-color;
+				.logout {
+					position: absolute;
+					top: 0;
+					right: 0;
+					left: 0;
+					bottom: 0;
+					background-color: transparent;
+					z-index: 9;
 				}
-			}
-			>view:last-child {
-				border-bottom: none;
 			}
 		}
 	}

@@ -1,4 +1,6 @@
 import { errorAlert } from './prompt.js'
+import store from '@/store/index'
+import { getUrlParam } from './index.js'
 
 // 三种情况
 /**
@@ -9,22 +11,30 @@ import { errorAlert } from './prompt.js'
 // 导出方法
 export default function axios(url, data = {}, prefix = 'app/register/') {
 	// 公共路径部分
-	// const BASE_URl = 'https://ezhenmai.com:7011/app/register/';
 	// if (process.env.NODE_ENV === 'development') {
 	//     console.log('开发环境')
 	// } else {
 	//     console.log('生产环境')
 	// }
 	
-	// const BASE_URl = 'http://192.168.1.190:8085/' + prefix;
-	const BASE_URl = 'http://www.ezhenmai.cn:59001/' + prefix;
+	// const BASE_URl = 'https://www.zjgoshine.com:9001/' + prefix;
+	// const BASE_URl = 'https://www.zjgoshine.com:59001/' + prefix;
+	const BASE_URl = 'http://192.168.1.190:8085/' + prefix;
+	if (!prefix.includes('app/login') && !url.includes('h5Share')) {
+		let { orgCode, id: hospitalId } = store.state.pavilion
+		data = {
+			...data,
+			orgCode: orgCode || getUrlParam('orgCode'),
+			hospitalId: hospitalId || getUrlParam('hospitalId')
+		}
+	}
 	let method = "post"
 	if (Object.keys(data).length === 0) {
 		method = "get"
 	}
 	// 非登录页添加请求头
 	let needToken = BASE_URl.includes('app/login')
-	let header = !needToken ? getHeaderInfo() : {}
+	let header = !needToken ? getHeaderInfo(BASE_URl) : {}
 	
 	// 返回一个小程序的请求方式  （wx.request）
 	return new Promise((resolve, reject) => {
@@ -52,20 +62,26 @@ export default function axios(url, data = {}, prefix = 'app/register/') {
 }
 
 // 获取请求头数据
-function getHeaderInfo() {
-	let patInfo = uni.getStorageSync('patient_info')
+function getHeaderInfo(url) {
+	let patInfo = store.state.patientInfo
 	let { authToken, loginTime, phoneNumber } = patInfo
-	return { authToken, loginTime, phoneNumber }
+	let headObject = { authToken, loginTime, phoneNumber, headObject: 'h5' }
+	// #ifdef MP-WEIXIN
+		headObject.source = 'wechat'
+	// #endif
+	return headObject
 }
 
 // 异常提示
 function errorHandle(code, message) {
 	if (code === 1) {
 		errorAlert(message)
+		// #ifdef H5
 		if (message && message.includes('请重新登录')) {
 			uni.navigateTo({
 				url: '/pages/login/login'
 			})
 		}
+		// #endif
 	}
 }

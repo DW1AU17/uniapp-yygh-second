@@ -3,7 +3,8 @@
 		{
 			"path": "pages/tabBar/skip/skip",
 			"style": {
-				"navigationBarTitleText": "预约"
+				"navigationBarTitleText": "首页",
+				"navigationStyle": "custom"
 			}
 		},
 		{
@@ -33,15 +34,14 @@
 		{
 			"path": "pages/tabBar/mine/mine",
 			"style": {
-				"navigationBarTitleText": "个人中心"
+				"navigationBarTitleText": "个人中心",
+				"navigationStyle": "custom"
 			}
 		},
 		{
 			"path": "pages/source/source",
 			"style": {
-				"navigationBarTitleText": "号源列表",
-				"navigationBarTextStyle": "white",
-				"navigationBarBackgroundColor": "#52627c"
+				"navigationBarTitleText": "号源列表"
 			}
 		},
 		{
@@ -65,7 +65,8 @@
 		{
 			"path": "pages/login/login",
 			"style": {
-				"navigationBarTitleText": "登录"
+				"navigationBarTitleText": "登录",
+				"navigationStyle": "custom"
 			}
 		},
 		{
@@ -85,6 +86,36 @@
 			"style": {
 				"navigationBarTitleText": "搜索"
 			}
+		},
+		{
+			"path": "pages/auth/auth",
+			"style": {
+				"navigationBarTitleText": "桐君堂国医馆"
+			}
+		},
+		{
+			"path": "pages/about/about",
+			"style": {
+				"navigationBarTitleText": "关于我们"
+			}
+		},
+		{
+			"path": "pages/news/news",
+			"style": {
+				"navigationBarTitleText": "新闻资讯"
+			}
+		},
+		{
+			"path": "pages/video/video",
+			"style": {
+				"navigationBarTitleText": "专家送福"
+			}
+		},
+		{
+			"path": "pages/webView/index",
+			"style": {
+				"navigationBarTitleText": "领福袋"
+			}
 		}
 	],
 	"globalStyle": {
@@ -94,15 +125,15 @@
 		"backgroundColor": "#fff"
 	},
 	"tabBar": {
-	    "color": "#7A7E83",
-	    "selectedColor": "#d3c09d",
+	    "color": "#999",
+	    "selectedColor": "#666",
 	    "borderStyle": "black",
-	    "backgroundColor": "#ffffff",
+	    "backgroundColor": "#fff",
 	    "list": [{
 	        "pagePath": "pages/tabBar/skip/skip",
 			"iconPath": "static/tab/order.png",
 			"selectedIconPath": "static/tab/orderSelect.png",
-	        "text": "预约"
+	        "text": "首页"
 	    }, {
 	        "pagePath": "pages/tabBar/mine/mine",
 			"iconPath": "static/tab/mine.png",

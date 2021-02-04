@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "专家送福",
+  "usingComponents": {
+    "arrow": "/components/arrow/arrow"
+  }
+}

@@ -57,9 +57,10 @@
     "quickapp" : {},
     /* 小程序特有相关 */
     "mp-weixin" : {
-        "appid" : "",
+        "appid" : "wx77c3aacbff45b6a7",
         "setting" : {
-            "urlCheck" : false
+            "urlCheck" : false,
+			"checkSiteMap": false
         },
         "usingComponents" : true
     },
@@ -80,6 +81,14 @@
             "base" : "./",
             "mode" : "hash"
         },
-        "title" : "register"
+        "title" : "register",
+        "template" : "index.html",
+        "sdkConfigs" : {
+            "maps" : {
+                "qqmap" : {
+                    "key" : "NOGBZ-TDZ3W-AWSRV-RDKRS-FLVP5-XOBPS"
+                }
+            }
+        }
     }
 }

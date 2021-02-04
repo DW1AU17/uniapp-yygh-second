@@ -1,0 +1,86 @@
+@charset "UTF-8";
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 阴影色 */
+/* 边框色 */
+/* 圆角尺寸 */
+/* 背景色 */
+/* 面板相关字体 */
+.reg-record-page {
+  padding: 0 30rpx;
+}
+.reg-record-page .header {
+  padding: 0 38rpx;
+  height: 45px;
+  color: #000;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+}
+.reg-record-page .header .left {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+  line-height: 45px;
+}
+.reg-record-page .header .right {
+  width: 20px;
+  height: 20px;
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAAWCAMAAAAsJOYWAAABS2lUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4KPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS42LWMxNDIgNzkuMTYwOTI0LCAyMDE3LzA3LzEzLTAxOjA2OjM5ICAgICAgICAiPgogPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4KICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIi8+CiA8L3JkZjpSREY+CjwveDp4bXBtZXRhPgo8P3hwYWNrZXQgZW5kPSJyIj8+nhxg7wAAAARnQU1BAACxjwv8YQUAAAABc1JHQgCuzhzpAAAA0lBMVEUAAABmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmaYXFCFAAAARXRSTlMAChUB8QMGHP32xuPkf34qKWTtZjrsUVI5Xz1K+/z49y4+S2F1LebWkxHBldTcqXflIA8S2o6kyse4tbm9q8sMH6PhkNnI2gQRAAAAhklEQVQY003O1RLCUAwE0CoVpEBxL1rc3WX//5d4uknylDM7m4k2n4w1ngVmDsueIpkVaRrFimDoenXBcqtRFYws9AU7Q+xN5nqHQ4JpPHDWmc8rTiz9giNh6+O2UXBGuNOVIIXYVijkkaFO13NzhF6zXSIsYdXUbn6xGlDyxu/FL3x8g/EHBZ8NsvZelc0AAAAASUVORK5CYII=) no-repeat;
+  background-size: 20rpx 32rpx;
+  margin-top: 30rpx;
+}
+.reg-record-page .main {
+  font-size: 24rpx;
+  color: #999;
+  padding: 30rpx 0;
+}
+.reg-record-page .main .border-box {
+  margin-bottom: 20rpx;
+}
+.reg-record-page .main .border-box .reg-item {
+  padding: 10rpx 30rpx;
+}
+.reg-record-page .main .border-box .reg-item .top {
+  font-size: 34rpx;
+  color: #000;
+}
+.reg-record-page .main .border-box .reg-item .top text:nth-child(2) {
+  float: right;
+  color: #c49d6a;
+  font-size: 30rpx;
+}
+.reg-record-page .main .border-box .reg-item .bottom {
+  font-size: 28rpx;
+}
+.reg-record-page .main .border-box .reg-item .bottom .item {
+  line-height: 1.7;
+}
+.reg-record-page .main .border-box .reg-item .bottom .item text {
+  margin-right: 44rpx;
+}
+.reg-record-page .main .border-box .reg-item .footer {
+  text-align: center;
+  padding: 5rpx 0;
+}
+.reg-record-page .main .border-box .reg-item .footer text {
+  font-size: 26rpx;
+  line-height: 1.5;
+  display: inline-block;
+  padding: 2px 10px;
+  -webkit-border-radius: 3px;
+          border-radius: 3px;
+  margin-top: 5px;
+  background-color: #c49d6a;
+  color: #fff;
+}
+.reg-record-page .main .border-box:last-child {
+  margin-bottom: 0;
+}
+

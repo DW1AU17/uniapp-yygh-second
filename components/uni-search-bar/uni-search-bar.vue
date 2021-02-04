@@ -4,16 +4,17 @@
 		<view :style="{borderRadius:radius+'px',backgroundColor: bgColor}" class="uni-searchbar__box" @click="searchClick">
 			<!-- #ifdef MP-ALIPAY -->
 			<view class="uni-searchbar__box-icon-search">
-				<uni-icons color="#999999" size="18" type="search" />
+				<!-- <uni-icons color="#999999" size="18" type="search" /> -->
 			</view>
 			<!-- #endif -->
 			<!-- #ifndef MP-ALIPAY -->
-			<uni-icons color="#999999" class="uni-searchbar__box-icon-search" size="18" type="search" />
+			<!-- <uni-icons color="#999999" class="uni-searchbar__box-icon-search" size="18" type="search" /> -->
 			<!-- #endif -->
 			<input v-if="show" :focus="showSync" :placeholder="placeholder" :maxlength="maxlength" @confirm="confirm" class="uni-searchbar__box-search-input" confirm-type="search" type="text" v-model="searchVal" />
 			<text v-else class="uni-searchbar__text-placeholder">{{ placeholder }}</text>
 			<view v-if="show && (clearButton==='always'||clearButton==='auto'&&searchVal!=='')" class="uni-searchbar__box-icon-clear" @click="clear">
-				<uni-icons color="#999999" class="" size="24" type="clear" />
+				<!-- <uni-icons color="#999999" class="" size="20" type="clear" /> -->
+				<text class="delete"></text>
 			</view>
 		</view>
 		<text @click="cancel" class="uni-searchbar__cancel" v-if="cancelButton ==='always' || show && cancelButton ==='auto'">{{cancelText}}</text>
@@ -21,7 +22,6 @@
 </template>
 
 <script>
-	import uniIcons from "../uni-icons/uni-icons.vue";
 
 	/**
 	 * SearchBar 搜索栏
@@ -47,9 +47,6 @@
 
 	export default {
 		name: "UniSearchBar",
-		components: {
-			uniIcons
-		},
 		props: {
 			placeholder: {
 				type: String,
@@ -73,13 +70,23 @@
 			},
 			bgColor: {
 				type: String,
-				default: "#F8F8F8"
+				default: "#fff"
 			},
 			maxlength: {
 				type: [Number, String],
 				default: 100
 			},
 			mask: {
+				type: Boolean,
+				default: false
+			},
+			orgcode: {
+				default: ''
+			},
+			hospitalId: {
+				default: ''
+			},
+			focus: {
 				type: Boolean,
 				default: false
 			}
@@ -92,6 +99,15 @@
 			}
 		},
 		watch: {
+			focus: {
+				handler(val) {
+					if (val) {
+						this.show = true
+						this.showSync = true
+					}
+				},
+				immediate: true
+			},
 			searchVal() {
 				this.$emit("input", this.searchVal)
 			}
@@ -114,6 +130,7 @@
 				this.$emit("cancel", {
 					value: this.searchVal
 				});
+				uni.navigateBack()
 				this.searchVal = ""
 				this.show = false
 				this.showSync = false
@@ -135,7 +152,7 @@
 			},
 			goSearchPage() {
 				uni.navigateTo({
-					url: '/pages/search/search'
+					url: `/pages/search/search?orgCode=${this.orgcode}&hospitalId=${this.hospitalId}`
 				})
 			}
 		}
@@ -149,9 +166,9 @@
 		/* #endif */
 		flex-direction: row;
 		position: relative;
-		padding: 8px;
-		background-color: #ffffff;
-		box-shadow: 3px 3px 2px -2px #ccc;
+		/* #ifdef MP-WEIXIN */
+		padding: 0 20rpx;
+		/* #endif */
 	}
 
 	.uni-searchbar__box {
@@ -165,11 +182,11 @@
 		justify-content: center;
 		flex-direction: row;
 		align-items: center;
-		height: 36px;
+		height: 60rpx;
 		padding: 5px 8px 5px 0px;
 		border-width: 0.5px;
 		border-style: solid;
-		border-color: #e5e5e5;
+		border-color: #bb8d4c;
 	}
 
 	.uni-searchbar__box-icon-search {
@@ -187,11 +204,12 @@
 		flex: 1;
 		font-size: 14px;
 		color: #333;
+		margin-left: 15px;
 	}
 
 	.uni-searchbar__box-icon-clear {
 		align-items: center;
-		line-height: 24px;
+		/* line-height: 24px; */
 		padding-left: 5px;
 	}
 
@@ -203,7 +221,7 @@
 
 	.uni-searchbar__cancel {
 		padding-left: 10px;
-		line-height: 36px;
+		line-height: 30px;
 		font-size: 14px;
 		color: #333;
 	}
@@ -213,5 +231,13 @@
 		height: 36px;
 		position: absolute;
 		z-index: 9;
+	}
+	.delete {
+		display: inline-block;
+		width: 40rpx;
+		height: 40rpx;
+		background: url(../../static/ui/clear.png) no-repeat;
+		background-size: 100%;
+		margin-top: 12rpx;
 	}
 </style>

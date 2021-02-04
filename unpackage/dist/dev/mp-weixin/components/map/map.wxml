@@ -1,0 +1,1 @@
+<view class="{{['map-comp',(hidden)?'hidden':'']}}"><map latitude="{{latitude}}" longitude="{{longitude}}" markers="{{markers}}" show-location="true" show-compass="true" data-event-opts="{{[['tap',[['getLocation',['$event']]]]]}}" bindtap="__e"></map><view data-event-opts="{{[['tap',[['hideMap',['$event']]]]]}}" class="model" bindtap="__e"></view></view>

@@ -1,0 +1,1 @@
+<view class="auth-page"><view class="img"><image src="/static/ui/logo.png" mode="aspectFit"></image></view><button type="primary" open-type="getPhoneNumber" data-event-opts="{{[['getphonenumber',[['getPhoneNumber',['$event']]]]]}}" bindgetphonenumber="__e"><image src="/static/ui/wechat.png"></image>微信手机号授权登录</button><view class="fc666 fs24 title">· 绑定手机号后才能正常享受预约服务</view></view>

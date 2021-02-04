@@ -1,0 +1,40 @@
+@charset "UTF-8";
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 阴影色 */
+/* 边框色 */
+/* 圆角尺寸 */
+/* 背景色 */
+/* 面板相关字体 */
+.modal-component .box.data-v-61712b04 {
+  background-color: #fff;
+  -webkit-border-radius: 5px;
+          border-radius: 5px;
+  margin-top: 20rpx;
+}
+.modal-component .box .top.data-v-61712b04 {
+  padding: 0 25rpx;
+  font-size: 16px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  width: 100%;
+  color: #666;
+}
+.modal-component .box .top .section__title.data-v-61712b04 {
+  text-align: center;
+}
+.modal-component .box .top picker.data-v-61712b04 {
+  line-height: 45px;
+  width: 50%;
+  position: relative;
+}
+.modal-component .box .top picker.data-v-61712b04::after {
+  content: '';
+  position: absolute;
+  border-right: 1px solid #bb8d4c;
+  height: 40rpx;
+  top: 26rpx;
+  right: 24rpx;
+}
+

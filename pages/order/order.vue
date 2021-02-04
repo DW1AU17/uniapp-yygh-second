@@ -1,69 +1,79 @@
 <template>
 	<view class="order-page">
-		<view class="common-detail">
-			<view class="item">
-				<text class="left">就诊地址</text>
-				<text class="right">桐君堂（环西馆）</text>
-			</view>
-			<view class="item">
-				<text class="left">科室</text>
-				<text class="right">{{orderInfo.depName}}</text>
-			</view>
-			<view class="item">
-				<text class="left">医生</text>
-				<text class="right">{{orderInfo.doctorName}}</text>
-			</view>
-			<view class="item">
-				<text class="left">就诊时间</text>
-				<text class="right">{{orderInfo.schedulingDate}} {{orderInfo.visitTime}}</text>
-			</view>
-			<view class="item">
-				<text class="left">就诊序号</text>
-				<text class="right">{{orderInfo.serialNumber}}号</text>
-			</view>
-			<view class="item">
-				<text class="left">挂号费用</text>
-				<text class="right red">{{orderInfo.totalFee}}.00元</text>
-			</view>
-		</view>
-		<view class="title">就诊人</view>
-		<view class="patient common-detail">
-			<view v-if="choosePat" @tap="goPatManagePage">选择就诊人</view>
-			<view v-else>
+		<view class="common-detail border-box">
+			<view class="border-box-inner gradient">
 				<view class="item">
-					<text class="left">姓名</text>
-					<text class="right">{{patientInfo.patName}}</text>
+					<text class="left">就诊地址</text>
+					<text class="right">桐君堂 · 环西馆</text>
 				</view>
-			<!-- 	<view class="item">
-					<text class="left">手机号</text>
-					<text class="right">{{patientInfo.phoneNumber}}</text>
-				</view> -->
 				<view class="item">
-					<text class="left">身份证</text>
-					<text class="right">{{patientInfo.idCard}}</text>
+					<text class="left">科室</text>
+					<text class="right">{{orderInfo.depName}}</text>
 				</view>
-				<view class="arrow">
-					<img src="@/static/jt.png" @tap="goPatManagePage"></img>
+				<view class="item">
+					<text class="left">医生</text>
+					<text class="right">{{orderInfo.doctorName}}</text>
+				</view>
+				<view class="item">
+					<text class="left">就诊时间</text>
+					<text class="right base-color">{{orderInfo.schedulingDate}} {{orderInfo.visitTime}}</text>
+				</view>
+				<view class="item">
+					<text class="left">就诊序号</text>
+					<text class="right">{{orderInfo.serialNumber}}号</text>
+				</view>
+				<view class="item">
+					<text class="left">挂号费用</text>
+					<text class="right">{{orderInfo.totalFee}}.00元</text>
 				</view>
 			</view>
 		</view>
-		<view>
-			<button type="primary" class="foot-button" @tap="commit">确定</button>
+		<view class="middle border-box">
+			<view class="border-box-inner gradient">
+				<view class="title">
+					<text>就诊人</text>
+					<text class="base-color fs26" @tap="goAddPage">+添加就诊人</text>
+				</view>
+				<view class="patient common-detail">
+					<view v-for="(item, index) in patientList" :key="item.patId" class="item">
+						<view class="left">
+							<radio :checked="currentIndex == index" @tap="currentIndex = index" color="#d09c5b" />
+						</view>
+						<view class="right">
+							<view class="fs30 fc000">{{item.userName}}</view>
+							<view class="lh1 fs23">
+								<text v-show="item.phoneNumber">手机号:{{formatPhone(item.phoneNumber)}}; </text>
+								<text v-show="item.cardCode">身份证:{{formatIDCard(item.cardCode)}}</text>
+							</view>
+						</view>
+					</view>
+				</view>
+			</view>
 		</view>
-		<view class="mind">挂号须知: 预约挂号就诊当日不能退号，如有疑问请拨打<text @tap="callPhone">telephone</text></view>
+		<view class="footer">
+			<button type="primary" class="foot-button" @tap="commit">提交预约</button>
+			<view class="read">
+				<radio :checked="checked" color="#d09c5b" @tap="toggleCheck" />
+				<view>我已阅读<text class="blue" @tap="goIndexPage">《预约须知》</text></view>
+			</view>
+		</view>
 	</view>
 </template>
 
 <script>
 	import { commitRegisterInfo } from '@/common/api/register.js'
-	import { mapState } from 'vuex'
+	import { getCurrentPatientInfo } from '@/common/api/patient.js'
+	import { mapState, mapGetters } from 'vuex'
+	import axios from '@/common/utils/request.js'
 	export default {
 		data() {
 			return {
 				orderInfo: {},
 				patientInfo: {},
-				choosePat: true, // 选择就诊人
-				telephone: '0571-87099390'
+				telephone: '0571-87099390',
+				isloding: true,
+				checked: false,
+				currentIndex: '', 
 			}
 		},
 		onLoad() {
@@ -72,47 +82,64 @@
 			eventChannel.on('orderPageAcceptData', (data) => {
 				this.orderInfo = data.data
 			})
-		},
-		onShow() {
 			this.getDefaultPatient()
 		},
 		computed: {
 			/**
 			 * patientList 患者列表
 			 */
-			...mapState(['orgCode', 'patientList'])
+			...mapState(['patientList', 'hasLogin']),
+			...mapGetters(['orgCode'])
 		},
 		methods: {
+			goIndexPage() {
+				this.checked = true
+				uni.navigateTo({
+					url: '/pages/index/index'
+				})
+			},
+			toggleCheck() {
+				this.checked = !this.checked
+			},
 			/**
 			 * 获取默认就诊人
 			 */
 			getDefaultPatient() {
-				if (patientList.length) {
-					this.choosePat = false
-					this.patientInfo = patientList[0] // 缺一个默认就诊人的字段
+				if (this.patientList.length) {
+					let index = this.patientList.findIndex(item => item.defaultSign === '1')
+					this.currentIndex = index
 				}
 			},
 			/**
 			 * 提交预约信息
 			 */
 			async commit() {
-				let { timeState: ampm, id: regId, schedulingId: schId, schedulingDate: visitDate } = this.orderInfo
-				let { patId } = this.patientInfo
-				if (!Object.keys(this.patientInfo).length) {
-					return this.errorAlert('请选择就诊人')
-				} else if (!patId) {
-					return this.errorAlert('患者信息有误请联系馆里人员')
+				if (!this.checked) {
+					return this.errorAlert('请先阅读并勾上预约须知')
 				}
-				let data = { numId: regId, orgCode: this.orgCode, ampm, regId, patId, schId, visitDate }
-				/* 提交预约信息 */ 
-				let res = await commitRegisterInfo(data)
-				if (res.code == 0) {
-					this.successAlert(res.message)
-					setTimeout(() => {
-						uni.switchTab({
-							url: '/pages/tabBar/mine/mine'
-						})
-					}, 1000)
+				if (this.isLogin()) {
+					let patientInfo = this.patientList[this.currentIndex]
+					let { cardType, cardCode, userName } = patientInfo
+					// 获取当前选择人员patId
+					let { data: { id: patId } } = await getCurrentPatientInfo({ cardType, cardCode, userName }) 
+					if (!Object.keys(patientInfo).length) {
+						return this.errorAlert('请选择就诊人')
+					} else if (!patId) {
+						return this.errorAlert('患者信息有误请联系馆里人员')
+					}
+					let { timeState, id: sourceDetailId, schedulingId, schedulingDate: visitDate, orgCode } = this.orderInfo
+					orgCode = orgCode || this.orgCode
+					let data = { timeState, sourceDetailId, schedulingId, visitDate, orgCode, patId }
+					/* 提交预约信息 */ 
+					let res = await commitRegisterInfo(data)
+					if (res.code == 0) {
+						this.successAlert('预约成功')
+						setTimeout(() => {
+							uni.switchTab({
+								url: '/pages/tabBar/mine/mine'
+							})
+						}, 1000)
+					}
 				}
 			},
 			/**
@@ -128,67 +155,154 @@
 			 */
 			goPatManagePage() {
 				let that = this
-				uni.navigateTo({
-					url: '/pages/patientManage/index?type=order',
-					events: {
-						// 接受打开页面返回的数据
-						getChoosePatientFromPatientManagePage: data => {
-							that.patientInfo = data
-						}
-					} 
-				})
+				if (this.isLogin()) {
+					uni.navigateTo({
+						url: '/pages/patientManage/index?type=order',
+						events: {
+							// 接受打开页面返回的数据
+							getChoosePatientFromPatientManagePage: data => {
+								that.patientInfo = data
+							}
+						} 
+					})
+				}
 			},
+			/**
+			 * 是否登录
+			 */
+			isLogin() {
+				if (this.hasLogin) {
+					return true
+				} else {
+					uni.navigateTo({
+						url: '/pages/login/login'
+					})
+					return false
+				}
+			},
+			/**
+			 * 添加就诊人
+			 */
+			goAddPage() {
+				if (this.patientList.length === 5) {
+					this.errorAlert('最多添加5位就诊人')
+				} else {
+					uni.navigateTo({
+						url: '/pages/register/register'
+					})
+				}
+			},
+			formatIDCard(val) {
+				let card = ''
+				if (val) {
+					if (val.length == 18) {
+						card = `${val.slice(0,3)}********${val.slice(14)}`
+					} else {
+						card = `${val.slice(0,3)}********${val.slice(val.length-3)}`
+					}
+				}
+				return card
+			},
+			formatPhone(val) {
+				return val ? `${val.slice(0,3)}****${val.slice(7)}` : ''
+			}
 		}
 	}
 </script>
 
 <style lang="scss">
 	.order-page {
-		padding: 10px;
-		font-size: 16px;
+		padding: 30rpx;
+		height: calc(100% - 60rpx);
+		color: #666;
+		.border-box-inner {
+			padding: 30rpx 0;
+		}
 		.common-detail {
-			border: 1px solid #ccc;
-			background: #fff;
-			padding: 10px;
-			border-radius: 10px;
 			position: relative;
 			.item {
 				display: flex;
+				padding: 0 30rpx;
 				.left {
 					width: 85px;
 				}
 				.right {
 					flex: 1;
-					
+					text-align: right;
 				}
 			}	
 			.arrow {
+				width: 22rpx;
+				height: 38rpx;
+				background: url(../../static/ui/arrow-right.png) no-repeat;
+				background-size: cover;
 				position: absolute;
-				top: 50%;
-				right: 0;
-				img {
-					width: 25px;
-					height: 18px;
-					transform: rotate(-90deg) translateX(50%);
+				top: 56rpx;
+				right: 22rpx;
+				&.none {
+					right: 56rpx;
+					top: 3rpx;
 				}
 			}
 		}
-		.title {
-			text-align: center;
-			margin-top: 10px;
-			font-weight: 700;
+		.middle {
+			margin-top: 20rpx;
+			.border-box-inner {
+				>view {
+					padding: 0 30rpx;
+					.item {
+						padding: 0;
+						margin-bottom: 16rpx;
+						.right {
+							text-align: left;
+						}
+						.left {
+							width: 80rpx;
+							radio {
+								margin-top: 20rpx;
+							}
+						}
+					}
+				}
+			}
+			.title {
+				color: #000;
+				font-size: 34rpx;
+				.base-color {
+					float: right;
+				}
+			}
 		}
-		.patient {}
-		.mind {
-			margin-top: 10px;
-			line-height: 1.2;
-			color: #444;
-			padding: 10px 10px;
-			font-size: 16px;
-		}
-		.foot-button {
-			background-color: #7F8FEF;
-			margin-top: 15px;
+		
+		.footer {
+			// position: fixed;
+			// bottom: 0;
+			// left: 0;
+			// right: 0;
+			margin-top: 40rpx;
+			height: 160rpx;
+			.foot-button {
+				width: 80%;
+				height: 60rpx;
+				line-height: 60rpx;
+				border-radius: 30rpx;
+				background-color: $s-color;
+				font-size: 28rpx;
+			}
+			.read {
+				text-align: center;
+				margin-top: 10px;
+				radio {
+					transform: scale(0.9);
+				}
+				>view {
+					display: inline-block;
+					color: #666;
+					.blue {
+						color: #d09c5b;
+					}
+				}
+			}			
 		}
 	}
 </style>

@@ -1,0 +1,52 @@
+{
+  "pages": [
+    "pages/tabBar/skip/skip",
+    "pages/index/index",
+    "pages/pavilion/pavilion",
+    "pages/subscribe/subscribe",
+    "pages/doctor/doctor",
+    "pages/tabBar/mine/mine",
+    "pages/source/source",
+    "pages/order/order",
+    "pages/registerRecord/index",
+    "pages/patientManage/index",
+    "pages/login/login",
+    "pages/register/register",
+    "pages/complateInfo/index",
+    "pages/search/search",
+    "pages/auth/auth",
+    "pages/about/about",
+    "pages/news/news",
+    "pages/video/video",
+    "pages/webView/index"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#fff",
+    "backgroundColor": "#fff"
+  },
+  "tabBar": {
+    "color": "#999",
+    "selectedColor": "#666",
+    "borderStyle": "black",
+    "backgroundColor": "#fff",
+    "list": [
+      {
+        "pagePath": "pages/tabBar/skip/skip",
+        "iconPath": "static/tab/order.png",
+        "selectedIconPath": "static/tab/orderSelect.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/tabBar/mine/mine",
+        "iconPath": "static/tab/mine.png",
+        "selectedIconPath": "static/tab/mineSelect.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "usingComponents": {},
+  "sitemapLocation": "sitemap97.json"
+}

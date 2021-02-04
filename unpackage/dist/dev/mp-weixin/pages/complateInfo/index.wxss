@@ -1,0 +1,51 @@
+@charset "UTF-8";
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 阴影色 */
+/* 边框色 */
+/* 圆角尺寸 */
+/* 背景色 */
+/* 面板相关字体 */
+.complate-page {
+  height: 100%;
+  padding: 30rpx;
+}
+.complate-page .cus-form {
+  background-color: #fff;
+}
+.complate-page .cus-form > view {
+  padding: 20rpx 0;
+}
+.complate-page .cus-form .cus-form-item {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  font-size: 28rpx;
+  padding: 0 50rpx;
+  line-height: 62rpx;
+}
+.complate-page .cus-form .cus-form-item:last-child {
+  border-bottom: none;
+}
+.complate-page .cus-form .cus-form-item .cus-title {
+  color: #666;
+  width: 170rpx;
+}
+.complate-page .remind {
+  padding: 20rpx 0;
+  font-size: 24rpx;
+}
+.complate-page .remind .title {
+  color: #666;
+}
+.complate-page .remind .single {
+  color: #999;
+}
+.uni-input-placeholder {
+  font-size: 28rpx;
+  color: #ccc;
+}
+

@@ -13,10 +13,10 @@ export default function validateForm(data, rule) {
 	}
 	for (let i = 0; i < rule.length; i++) {
 		switch (rule[i].prop) {
-			case 'username':
-				if (!data.username) {
+			case 'userName':
+				if (!data.userName) {
 					return errorHandler('姓名不能为空')
-				} else if (data.username.length < 2) {
+				} else if (data.userName.length < 2) {
 					return errorHandler('姓名必须大于等于2位')
 				}
 				break
@@ -27,17 +27,17 @@ export default function validateForm(data, rule) {
 					return errorHandler('姓名必须大于等于2位')
 				}
 				break
-			case 'mobilePhone':
-				if (!data.mobilePhone) {
+			case 'phoneNumber':
+				if (!data.phoneNumber) {
 					return errorHandler('手机号不能为空')
-				} else if (!RegExp.mobilePhone.test(data.mobilePhone)) {
+				} else if (!RegExp.phoneNumber.test(data.phoneNumber)) {
 					return errorHandler('手机号格式不正确')
 				}
 				break
-			case 'idCard':
-				if (!data.idCard) {
+			case 'cardCode':
+				if (!data.cardCode) {
 					return errorHandler('身份证不能为空')
-				} else if (!RegExp.idCard.test(data.idCard)) {
+				} else if (!RegExp.cardCode.test(data.cardCode)) {
 					return errorHandler('身份证格式不正确')
 				}
 				break

@@ -1,0 +1,61 @@
+@charset "UTF-8";
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 阴影色 */
+/* 边框色 */
+/* 圆角尺寸 */
+/* 背景色 */
+/* 面板相关字体 */
+.index-page {
+  padding: 30rpx;
+  height: calc(100% - 60px);
+}
+.index-page .main {
+  height: calc(100% - 20px);
+  font-size: 26rpx;
+}
+.index-page .main .border-box-inner {
+  height: 100%;
+  padding: 0 30rpx;
+}
+.index-page .main .border-box-inner > view {
+  height: 100%;
+  overflow-y: auto;
+}
+.index-page .main .border-box-inner .p {
+  margin-bottom: 34rpx;
+}
+.index-page .main .border-box-inner .p > view {
+  text-indent: 46rpx;
+}
+.index-page .main .border-box-inner .p:nth-child(1) {
+  margin-top: 20rpx;
+}
+.index-page .footer {
+  padding: 0 10px;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  height: 65px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+}
+.index-page .footer label {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+}
+.index-page .footer .btn {
+  background-color: #bb8d4c;
+  color: #fff;
+  width: 464rpx;
+  -webkit-border-radius: 30rpx;
+          border-radius: 30rpx;
+  font-size: 26rpx;
+}
+

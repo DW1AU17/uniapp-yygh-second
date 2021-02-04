@@ -1,81 +1,110 @@
 <template>
-	<view class="single-item" @tap="goSourcePage">
-		<view class="pic">
-			<img src="/static/doctor.png">
-		</view>
-		<view class="right">
-			<view>
-				<text class="doc-name">蔡徐坤</text>
-				<text class="post">国家级男技师</text>
+	<view class="border-box">
+		<view class="single-item border-box-inner gradient" @tap="goSourcePage">
+			<view class="pic">
+				<!-- <image v-if="source.img == 0" src="/static/ui/0000.jpg" lazy-load/> -->
+				<image :src="'https://www.zjgoshine.com:59001/resource/'+source.img+'.jpg'" @error="handleError" lazy-load/>
 			</view>
-			<view class="introduce">
-				<text class="text-line2">针灸高手针灸高手针灸高, 手针灸高手针灸高手针灸高手针灸高手针灸高手针灸高手针灸高手针灸高手针灸高手针灸高手针灸高手针灸高手针灸高手针灸高手针灸高手针灸高手针灸高手针灸高手针灸高手针灸高手针灸高手针灸高手针灸高手针灸高手针灸高手</text>
+			<view class="right">
+				<view>
+					<text class="doc-name">{{source.name}} {{source.img}}</text>
+					<text class="post">{{source.title}}</text>
+				</view>
+				<view class="introduce">
+					<text class="text-line2">{{source.introduce}}</text>
+				</view>
 			</view>
 		</view>
 	</view>
 </template>
 
 <script>
+	import { mapGetters } from 'vuex'
 	export default {
-		methods: {
-			goSourcePage(data) {
-				console.log('跳转号源页面')
-				uni.navigateTo({
-					url: '/pages/source/source'
-				})
-				// let that = this
-				// uni.navigateTo({
-				//     url: `/pages/source/source`,
-				// 	success(res) {
-				// 		res.eventChannel.emit('acceptDataFromOpenerPage', { data: { ...data, depName: that.depName } })
-				// 	}
-				// });
+		props: {
+			source: {
+				type: Object,
+				default: {}
 			},
+			orgCode: {
+				required: true
+			},
+			hospitalId: {
+				required: true
+			}
+		},
+		computed: {
+			// ...mapGetters(['orgCode', 'hospitalId'])
+		},
+		methods: {
+			goSourcePage() {
+				let url = `?orgCode=${this.orgCode}&hospitalId=${this.hospitalId}&id=${this.source.id}&name=${this.source.name}`
+				uni.navigateTo({
+					url: `/pages/source/source${url}`
+					// success(res) {
+					// 	res.eventChannel.emit('doctorInfoFromDocPanel', { data: that.source })
+					// }
+				})
+			},
+			handleError(e) {
+				console.log(123)
+				// this.$emit('editImgUrl', { url: '0000', name: this.source.name, id: this.source.id })
+			}
 		}
 	}
 </script>
 
 <style lang="scss">
-	.single-item {
-		border-bottom: 1px solid $bc-color;
-		display: flex;
-		padding: 20rpx;
-		background-color: #fff;
-		.pic {
-			width: 90rpx;
-			height: 90rpx;
-			margin: 20rpx 20rpx 20rpx 0;
-			img {
-				width: 100%;
-				height: 100%;
-				border-radius: 50%;
-			}
-		}
-		.right {
-			flex: 1;
-			padding: 10rpx;
-			.doc-name {
-				font-size: $fs-30;
+	.border-box {
+		margin-bottom: 20rpx;
+		.single-item {
+			border-bottom: 1px solid $bc-color;
+			display: flex;
+			padding: 30rpx 20px 20px 20px;
+			background-color: #fff;
+			// align-items: center;
+			.pic {
+				width: 130rpx;
+				height: 130rpx;
+				line-height: 100rpx;
+				text-align: center;
 				margin-right: 20rpx;
-				font-weight: 700;
-				color: $base-color;
-			}
-			.post {
-				font-size: $fs-26;
-				color: $base-color;
-			}
-			.introduce {
-				color: $color-shallow;
-				line-height: 1.4;
-				font-size: $fs-24;
-				margin-top: 4rpx;
-				text {
-					line-height: 1.3;
+				border: 1px solid $s-color;
+				border-radius: 50%;
+				overflow: hidden;
+				margin-top: 10rpx;
+				image {
+					width: 100%;
+					height: 100%;
 				}
 			}
-		}
-		&:last-child {
-			border-bottom: none;
+			.right {
+				flex: 1;
+				padding: 10rpx;
+				.doc-name {
+					font-size: 34rpx;
+					margin-right: 24rpx;
+					font-weight: 700;
+					color: #000;
+				}
+				.post {
+					font-size: 26rpx;
+					font-weight: 700;
+					color: #666;
+				}
+				.introduce {
+					color: #999;
+					margin-top: 10rpx;
+					line-height: 1.5;
+					font-size: 24rpx;
+					text {
+						line-height: 1.3;
+					}
+				}
+			}
+			&:last-child {
+				border-bottom: none;
+			}
 		}
 	}
 </style>

@@ -1,0 +1,17 @@
+@charset "UTF-8";
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 阴影色 */
+/* 边框色 */
+/* 圆角尺寸 */
+/* 背景色 */
+/* 面板相关字体 */
+.nothing {
+  text-align: center;
+  margin-top: 160rpx;
+}
+.nothing image {
+  width: 150rpx;
+  height: 150rpx;
+}
+
