@@ -1,9 +1,0 @@
-{
-  "navigationBarTitleText": "选择医生",
-  "usingComponents": {
-    "doctor-panel": "/components/doctor-panel/doctor-panel",
-    "nothing": "/components/nothing/nothing",
-    "search": "/components/uni-search-bar/uni-search-bar",
-    "date-panel": "/pages/doctor/components/date-panel"
-  }
-}

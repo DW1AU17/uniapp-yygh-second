@@ -1,1 +1,0 @@
-<view data-event-opts="{{[['tap',[['getDoctor',['$0'],['date']]]]]}}" class="{{['date-item',customClass]}}" bindtap="__e"><view><view class="day">{{date.week}}</view><view class="num num1">{{date.month}}</view><view class="num num2">{{date.day}}</view></view></view>

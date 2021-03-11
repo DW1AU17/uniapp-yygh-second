@@ -1,7 +1,0 @@
-{
-  "navigationBarTitleText": "专家送福",
-  "navigationStyle": "custom",
-  "usingComponents": {
-    "arrow": "/components/arrow/arrow"
-  }
-}

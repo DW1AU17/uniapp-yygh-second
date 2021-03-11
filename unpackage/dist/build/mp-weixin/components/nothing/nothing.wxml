@@ -1,1 +1,0 @@
-<view class="nothing"><image src="/static/ui/nothing.png" mode="widthFix"></image><view class="base-color"><slot></slot></view></view>
