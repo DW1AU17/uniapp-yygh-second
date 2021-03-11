@@ -31,7 +31,11 @@
 .index-page .main .border-box-inner .p > view {
   text-indent: 46rpx;
 }
-.index-page .main .border-box-inner .p image {
+.index-page .main .border-box-inner .p ._img {
+  width: 200rpx;
+  height: 200rpx;
+}
+.index-page .main .border-box-inner .p .img {
   width: 100%;
   margin: 0 auto;
 }

@@ -27,7 +27,6 @@
 			}
 		},
 		created() {
-			console.log('组件调用')
 			this.setIndex()
 		},
 		methods: {
@@ -46,7 +45,8 @@
 					let index = this.array.findIndex(item => item.id === currentId)
 					this.index = index 
 				} else {
-					this.setPavilion(pavList[0])
+					this.index = 1
+					this.setPavilion(pavHandleList[1])
 				}
 			}
 			// setNavTitle() {
@@ -67,7 +67,7 @@
 			border-radius: 5px;
 			margin-top: 20rpx;
 			.top {
-				padding: 0 25rpx;
+				// padding: 0 25rpx;
 				font-size: 16px;
 				display: flex;
 				width: 100%;
@@ -79,6 +79,7 @@
 					line-height: 45px;
 					width: 50%;
 					position: relative;
+					margin-left: 40rpx;
 					&::after {
 						content: '';
 						position: absolute;

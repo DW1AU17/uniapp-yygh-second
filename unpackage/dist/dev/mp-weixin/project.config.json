@@ -22,15 +22,7 @@
 			"current": -1,
 			"list": []
 		},
-		"plugin": {
-			"current": -1,
-			"list": []
-		},
 		"game": {
-			"current": -1,
-			"list": []
-		},
-		"gamePlugin": {
 			"current": -1,
 			"list": []
 		},
@@ -38,11 +30,10 @@
 			"current": 0,
 			"list": [
 				{
-					"id": 0,
-					"name": "pages/video/video",
-					"pathName": "pages/video/video",
-					"query": "date=2021-02-03",
-					"scene": null
+					"name": "",
+					"path": "",
+					"query": "",
+					"id": 0
 				}
 			]
 		}

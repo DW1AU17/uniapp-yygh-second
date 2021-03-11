@@ -29,7 +29,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _doctor_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./doctor.vue?vue&type=script&lang=js& */ 60);
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _doctor_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _doctor_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 /* harmony import */ var _doctor_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./doctor.vue?vue&type=style&index=0&lang=scss& */ 62);
-/* harmony import */ var _E_hb_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/runtime/componentNormalizer.js */ 22);
+/* harmony import */ var _E_hb_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/runtime/componentNormalizer.js */ 21);
 
 var renderjs
 
@@ -94,10 +94,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   doctorPanel: function() {
-    return __webpack_require__.e(/*! import() | components/doctor-panel/doctor-panel */ "components/doctor-panel/doctor-panel").then(__webpack_require__.bind(null, /*! @/components/doctor-panel/doctor-panel.vue */ 197))
+    return __webpack_require__.e(/*! import() | components/doctor-panel/doctor-panel */ "components/doctor-panel/doctor-panel").then(__webpack_require__.bind(null, /*! @/components/doctor-panel/doctor-panel.vue */ 207))
   },
   nothing: function() {
-    return __webpack_require__.e(/*! import() | components/nothing/nothing */ "components/nothing/nothing").then(__webpack_require__.bind(null, /*! @/components/nothing/nothing.vue */ 204))
+    return __webpack_require__.e(/*! import() | components/nothing/nothing */ "components/nothing/nothing").then(__webpack_require__.bind(null, /*! @/components/nothing/nothing.vue */ 214))
   }
 }
 var render = function() {
@@ -204,8 +204,8 @@ var _register = __webpack_require__(/*! @/common/api/register.js */ 53);
 
 
 
-var _index = __webpack_require__(/*! @/common/utils/index.js */ 18);
-var _vuex = __webpack_require__(/*! vuex */ 16);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var search = function search() {__webpack_require__.e(/*! require.ensure | components/uni-search-bar/uni-search-bar */ "components/uni-search-bar/uni-search-bar").then((function () {return resolve(__webpack_require__(/*! @/components/uni-search-bar/uni-search-bar */ 190));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var doctorPanel = function doctorPanel() {__webpack_require__.e(/*! require.ensure | components/doctor-panel/doctor-panel */ "components/doctor-panel/doctor-panel").then((function () {return resolve(__webpack_require__(/*! @/components/doctor-panel/doctor-panel */ 197));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var datePanel = function datePanel() {__webpack_require__.e(/*! require.ensure | pages/doctor/components/date-panel */ "pages/doctor/components/date-panel").then((function () {return resolve(__webpack_require__(/*! ./components/date-panel */ 211));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var nothing = function nothing() {__webpack_require__.e(/*! require.ensure | components/nothing/nothing */ "components/nothing/nothing").then((function () {return resolve(__webpack_require__(/*! @/components/nothing/nothing */ 204));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+var _index = __webpack_require__(/*! @/common/utils/index.js */ 28);
+var _vuex = __webpack_require__(/*! vuex */ 16);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var search = function search() {__webpack_require__.e(/*! require.ensure | components/uni-search-bar/uni-search-bar */ "components/uni-search-bar/uni-search-bar").then((function () {return resolve(__webpack_require__(/*! @/components/uni-search-bar/uni-search-bar */ 200));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var doctorPanel = function doctorPanel() {__webpack_require__.e(/*! require.ensure | components/doctor-panel/doctor-panel */ "components/doctor-panel/doctor-panel").then((function () {return resolve(__webpack_require__(/*! @/components/doctor-panel/doctor-panel */ 207));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var datePanel = function datePanel() {__webpack_require__.e(/*! require.ensure | pages/doctor/components/date-panel */ "pages/doctor/components/date-panel").then((function () {return resolve(__webpack_require__(/*! ./components/date-panel */ 221));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var nothing = function nothing() {__webpack_require__.e(/*! require.ensure | components/nothing/nothing */ "components/nothing/nothing").then((function () {return resolve(__webpack_require__(/*! @/components/nothing/nothing */ 214));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 {
   components: {
     search: search,
@@ -285,22 +285,20 @@ var _vuex = __webpack_require__(/*! vuex */ 16);function _interopRequireDefault(
                     introduce: item.sffSummary || '', // 介绍
                     depName: _this3.depName };
 
-                  (0, _index.CheckImgExists)("https://www.zjgoshine.com:59001/resource/".concat(item.sffLoginNum, ".jpg")).
-                  then(function (e) {obj.img = item.sffLoginNum;}).
-                  catch(function (e) {obj.img = '0000';});
+                  // CheckImgExists(`https://www.zjgoshine.com:9001/resource/${item.sffLoginNum}.jpg`)
+                  // 	.then(e => {obj.img = item.sffLoginNum})
+                  // 	.catch(e => {obj.img = '0000'})
                   resObj.push(obj);
-                });
-                console.log(resObj);return _context3.abrupt("return",
-                resObj);case 4:case "end":return _context3.stop();}}}, _callee3);}))();
+                });return _context3.abrupt("return",
+                resObj);case 3:case "end":return _context3.stop();}}}, _callee3);}))();
     },
     activeDate: function activeDate(id) {
       return id === this.currentDate ? 'active' : '';
-    }
-    // editImgUrl(data) {
-    // 	let index = this.docList.findIndex(item => item.name === data.name)
-    // 	this.docList[index].img = data.url
-    // }
-  } };exports.default = _default;
+    },
+    editImgUrl: function editImgUrl(data) {
+      var index = this.docList.findIndex(function (item) {return item.name === data.name;});
+      this.docList[index].img = data.url;
+    } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

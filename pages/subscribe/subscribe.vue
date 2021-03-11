@@ -24,6 +24,7 @@
 	</view>
 </template>
 <script>
+	import { mapMutations } from 'vuex'
 	import { getDepartmentList } from '@/common/api/register.js'
 	import search from '@/components/uni-search-bar/uni-search-bar'
 	export default {
@@ -44,9 +45,11 @@
 		onLoad({orgCode, hospitalId}) {
 			this.hospitalId = hospitalId
 			this.orgCode = orgCode
+			this.setPavilion({ orgCode, id: hospitalId })
 			this.getDepList()
 		},
 		methods: {
+			...mapMutations(['setPavilion']),
 			/**
 			 * 获取科室大类
 			 */

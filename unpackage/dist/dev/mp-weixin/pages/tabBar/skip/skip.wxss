@@ -43,6 +43,10 @@
   width: 80rpx;
   height: 80rpx;
 }
+.skip-page .operate > view image.rotate, .skip-page .operate > button image.rotate {
+  -webkit-animation: rotate 1s infinite forwards;
+          animation: rotate 1s infinite forwards;
+}
 .skip-page .operate > view .text, .skip-page .operate > button .text {
   font-size: 24rpx;
   color: #333;
@@ -107,5 +111,33 @@
 }
 .skip-page .news .item .right > view:nth-child(1) {
   margin-bottom: 18rpx;
+}
+@-webkit-keyframes rotate {
+0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+}
+50% {
+    -webkit-transform: scale(1.1);
+            transform: scale(1.1);
+}
+100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+}
+}
+@keyframes rotate {
+0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+}
+50% {
+    -webkit-transform: scale(1.1);
+            transform: scale(1.1);
+}
+100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+}
 }
 

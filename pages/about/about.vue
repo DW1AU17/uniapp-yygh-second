@@ -4,7 +4,7 @@
 			<view class="border-box-inner gradient">
 				<view>
 					<view class="p">
-						<image src="../../static/ui/cyl.jpg" mode="widthFix"></image>
+						<image class="img" src="../../static/ui/cyl.jpg" mode="widthFix"></image>
 					</view>
 					<view class="p">
 						<view>桐君堂品牌始创于明•洪武十七年，历经600余年，是浙江省传统中医药文化的代表之一。以桐君堂品牌为代表的传统医药项目已被越来越多百姓认可和赞誉，在浙江省内乃至全国逐步普及。</view>
@@ -67,7 +67,11 @@
 					>view {
 						text-indent: 46rpx;
 					}
-					image {
+					img {
+						width: 200rpx;
+						height: 200rpx;
+					}
+					.img {
 						width: 100%;
 						margin: 0 auto;
 					}

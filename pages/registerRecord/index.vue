@@ -25,8 +25,9 @@
 								<view class="item"><text>就诊地址</text> 桐君堂 · {{item.pavName}}</view>
 							</view>
 						</view>
-						<view class="footer" v-if="item.appStatus == 0">
-							<text @tap="cancelReg(item)">取消预约</text>
+						<view class="footer">
+							<text v-if="item.appStatus == 0" @tap="cancelReg(item)">取消预约</text>
+							<text @tap="orderAgain(item)">再次预约</text>
 						</view>
 					</view>
 				</view>
@@ -63,7 +64,7 @@
 			/**
 			 * patientList 就诊人列表
 			 */ 
-			...mapState(['patientList'])
+			...mapState(['patientList', 'pavilion'])
 		},
 		methods: {
 			confirm() {
@@ -146,6 +147,16 @@
 						}
 					} 
 				})
+			},
+			/**
+			 * 再次预约
+			 */
+			orderAgain({ doctorId, doctorName }) {
+				console.log()
+				let { id: hospitalId, orgCode } = this.pavilion
+				uni.navigateTo({
+					url: `/pages/source/source?orgCode=${orgCode}&hospitalId=${hospitalId}&id=${doctorId}&name=${doctorName}`
+				})
 			}
 		}
 	}
@@ -192,11 +203,15 @@
 						}
 					}
 					.bottom {
-						font-size: 28rpx;
-						.item {
-							line-height: 1.7;
-							text {
-								margin-right: 44rpx;
+						font-size: 30rpx;
+						>view {
+							padding-top: 8rpx;
+							.item {
+								line-height: 1.7;
+								
+								text {
+									margin-right: 32rpx;
+								}
 							}
 						}
 					}
@@ -209,6 +224,7 @@
 							display: inline-block;
 							padding: 2px 10px;
 							border-radius: 3px;
+							margin: 0 10rpx;
 							margin-top: 5px;
 							background-color: $base-color;
 							color: #fff;

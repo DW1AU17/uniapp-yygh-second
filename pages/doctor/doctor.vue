@@ -128,21 +128,20 @@
 						introduce: item.sffSummary || '', // 介绍
 						depName: this.depName
 					}
-					CheckImgExists(`https://www.zjgoshine.com:59001/resource/${item.sffLoginNum}.jpg`)
-						.then(e => {obj.img = item.sffLoginNum})
-						.catch(e => {obj.img = '0000'})
+					// CheckImgExists(`https://www.zjgoshine.com:9001/resource/${item.sffLoginNum}.jpg`)
+					// 	.then(e => {obj.img = item.sffLoginNum})
+					// 	.catch(e => {obj.img = '0000'})
 					resObj.push(obj)
 				})
-				console.log(resObj)
 				return resObj
 			},
 			activeDate(id) {
 				return id === this.currentDate ? 'active' : ''
 			},
-			// editImgUrl(data) {
-			// 	let index = this.docList.findIndex(item => item.name === data.name)
-			// 	this.docList[index].img = data.url
-			// }
+			editImgUrl(data) {
+				let index = this.docList.findIndex(item => item.name === data.name)
+				this.docList[index].img = data.url
+			}
 		}
 	}
 </script>

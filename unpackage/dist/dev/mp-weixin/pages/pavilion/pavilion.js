@@ -29,7 +29,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pavilion_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./pavilion.vue?vue&type=script&lang=js& */ 43);
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _pavilion_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _pavilion_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 /* harmony import */ var _pavilion_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./pavilion.vue?vue&type=style&index=0&lang=scss& */ 45);
-/* harmony import */ var _E_hb_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/runtime/componentNormalizer.js */ 22);
+/* harmony import */ var _E_hb_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/runtime/componentNormalizer.js */ 21);
 
 var renderjs
 
@@ -149,7 +149,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _index = __webpack_require__(/*! @/common/utils/index */ 18); //
+var _index = __webpack_require__(/*! @/common/utils/index */ 28); //
 //
 //
 //
@@ -167,7 +167,7 @@ var _index = __webpack_require__(/*! @/common/utils/index */ 18); //
 //
 //
 //
-var pavPanel = function pavPanel() {Promise.all(/*! require.ensure | pages/pavilion/components/pav-panel */[__webpack_require__.e("common/vendor"), __webpack_require__.e("pages/pavilion/components/pav-panel")]).then((function () {return resolve(__webpack_require__(/*! ./components/pav-panel */ 183));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default = { components: { pavPanel: pavPanel }, data: function data() {return { pavList: _index.pavList };}, methods: { goSubscribePage: function goSubscribePage(data) {var id = data.id,orgCode = data.orgCode;uni.navigateTo({ url: "/pages/subscribe/subscribe?orgCode=".concat(orgCode, "&hospitalId=").concat(id) });} } };exports.default = _default;
+var pavPanel = function pavPanel() {Promise.all(/*! require.ensure | pages/pavilion/components/pav-panel */[__webpack_require__.e("common/vendor"), __webpack_require__.e("pages/pavilion/components/pav-panel")]).then((function () {return resolve(__webpack_require__(/*! ./components/pav-panel */ 193));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default = { components: { pavPanel: pavPanel }, data: function data() {return { pavList: _index.pavList };}, methods: { goSubscribePage: function goSubscribePage(data) {var id = data.id,orgCode = data.orgCode;uni.navigateTo({ url: "/pages/subscribe/subscribe?orgCode=".concat(orgCode, "&hospitalId=").concat(id) });} } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

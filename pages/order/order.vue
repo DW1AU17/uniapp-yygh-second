@@ -4,7 +4,7 @@
 			<view class="border-box-inner gradient">
 				<view class="item">
 					<text class="left">就诊地址</text>
-					<text class="right">桐君堂 · 环西馆</text>
+					<text class="right">桐君堂 · {{orderInfo.pavName}}</text>
 				</view>
 				<view class="item">
 					<text class="left">科室</text>
@@ -119,9 +119,9 @@
 				}
 				if (this.isLogin()) {
 					let patientInfo = this.patientList[this.currentIndex]
-					let { cardType, cardCode, userName } = patientInfo
+					let { cardType, cardCode, userName, phoneNumber } = patientInfo
 					// 获取当前选择人员patId
-					let { data: { id: patId } } = await getCurrentPatientInfo({ cardType, cardCode, userName }) 
+					let { data: { id: patId } } = await getCurrentPatientInfo({ cardType, cardCode, userName, phoneNumber }) 
 					if (!Object.keys(patientInfo).length) {
 						return this.errorAlert('请选择就诊人')
 					} else if (!patId) {

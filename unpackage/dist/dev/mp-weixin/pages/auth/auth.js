@@ -29,7 +29,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _auth_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./auth.vue?vue&type=script&lang=js& */ 144);
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _auth_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _auth_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 /* harmony import */ var _auth_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./auth.vue?vue&type=style&index=0&lang=scss& */ 146);
-/* harmony import */ var _E_hb_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/runtime/componentNormalizer.js */ 22);
+/* harmony import */ var _E_hb_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/runtime/componentNormalizer.js */ 21);
 
 var renderjs
 
@@ -146,7 +146,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var _vuex = __webpack_require__(/*! vuex */ 16);
 var _wechat = __webpack_require__(/*! @/common/api/wechat */ 13);
-var _patient = __webpack_require__(/*! @/common/api/patient */ 19);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var _default =
+var _patient = __webpack_require__(/*! @/common/api/patient */ 18);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var _default =
 {
   data: function data() {
     return {
@@ -170,48 +170,51 @@ var _patient = __webpack_require__(/*! @/common/api/patient */ 19);function _int
     /**
                                                                                   * 获取手机号
                                                                                   */
-    getPhoneNumber: function getPhoneNumber(e) {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var _e$detail, encryptedData, iv, errMsg, _this2$wechatToken, openId, sessionKey, params, res, _res$data, needRegisterFlag, pubUser, username, idCard, _phoneNumber, _id, patRes;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
-                console.log(e);_e$detail =
+    getPhoneNumber: function getPhoneNumber(e) {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var _e$detail, encryptedData, iv, errMsg, _this2$wechatToken, openId, sessionKey, params, res, _res$data, needRegisterFlag, pubUser, username, idCard, _phoneNumber, _id, patRes;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_e$detail =
                 e.detail, encryptedData = _e$detail.encryptedData, iv = _e$detail.iv, errMsg = _e$detail.errMsg;if (!(
-                errMsg === 'getPhoneNumber:ok')) {_context.next = 30;break;}_this2$wechatToken =
+                errMsg === 'getPhoneNumber:ok')) {_context.next = 29;break;}_this2$wechatToken =
                 _this2.wechatToken, openId = _this2$wechatToken.openId, sessionKey = _this2$wechatToken.sessionKey;
                 params = _objectSpread(_objectSpread({}, _this2.sourceData), {}, { encryptedData: encryptedData, iv: iv, openId: openId, sessionKey: sessionKey });
                 // 处理小程序授权用户信息
-                _context.next = 7;return (0, _wechat.wechatHandleUserInfo)(params);case 7:res = _context.sent;if (!(
-                res.code === 0)) {_context.next = 28;break;}_res$data =
+                _context.next = 6;return (0, _wechat.wechatHandleUserInfo)(params);case 6:res = _context.sent;if (!(
+                res.code === 0)) {_context.next = 27;break;}_res$data =
                 res.data, needRegisterFlag = _res$data.needRegisterFlag, pubUser = _res$data.pubUser;if (!(
-                needRegisterFlag === '0')) {_context.next = 28;break;}if (!
-                pubUser) {_context.next = 27;break;}
+                needRegisterFlag === '0')) {_context.next = 27;break;}if (!
+                pubUser) {_context.next = 26;break;}
                 username = pubUser.username, idCard = pubUser.idCard, _phoneNumber = pubUser.phoneNumber, _id = pubUser.id;
                 // 存到store中
                 _this2.setPatientInfo(pubUser);if (!(
-                username && idCard)) {_context.next = 24;break;}
+                username && idCard)) {_context.next = 23;break;}
                 // 否 登录成功 (保存用户信息, token携带在其中)
                 _this2.login();
-                /* 获取/设置就诊人列表 */_context.next = 18;return (
-                  (0, _patient.getPatientList)({ userId: pubUser.id }));case 18:patRes = _context.sent;
+                /* 获取/设置就诊人列表 */_context.next = 17;return (
+                  (0, _patient.getPatientList)({ userId: pubUser.id }));case 17:patRes = _context.sent;
                 _this2.setPatientList(patRes.data);
                 _this2.successAlert('登录成功');
                 // 登录成功
-                uni.switchTab({
-                  url: "/pages/tabBar/".concat(_this2.type, "/").concat(_this2.type) });_context.next = 25;break;case 24:
+                if (_this2.type) {
+                  uni.switchTab({
+                    url: "/pages/tabBar/".concat(_this2.type, "/").concat(_this2.type) });
+
+                } else {
+                  uni.navigateBack();
+                }_context.next = 24;break;case 23:
+
+                // 完善信息
+                uni.redirectTo({
+                  url: "/pages/complateInfo/index?p=".concat(_phoneNumber, "&id=").concat(_id, "&type=").concat(_this2.type) });case 24:_context.next = 27;break;case 26:
+
 
 
                 // 完善信息
                 uni.redirectTo({
-                  url: "/pages/complateInfo/index?p=".concat(_phoneNumber, "&id=").concat(_id, "&type=").concat(_this2.type) });case 25:_context.next = 28;break;case 27:
-
-
-
-                // 完善信息
-                uni.redirectTo({
-                  url: "/pages/complateInfo/index?p=".concat(phoneNumber, "&id=").concat(id, "&type=").concat(_this2.type) });case 28:_context.next = 31;break;case 30:
+                  url: "/pages/complateInfo/index?p=".concat(phoneNumber, "&id=").concat(id, "&type=").concat(_this2.type) });case 27:_context.next = 30;break;case 29:
 
 
 
 
 
-                _this2.errorAlert('取消操作');case 31:case "end":return _context.stop();}}}, _callee);}))();
+                _this2.errorAlert('取消操作');case 30:case "end":return _context.stop();}}}, _callee);}))();
 
     } }) };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

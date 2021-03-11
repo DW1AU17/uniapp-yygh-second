@@ -13,7 +13,6 @@
   margin-top: 20rpx;
 }
 .modal-component .box .top.data-v-61712b04 {
-  padding: 0 25rpx;
   font-size: 16px;
   display: -webkit-box;
   display: -webkit-flex;
@@ -28,6 +27,7 @@
   line-height: 45px;
   width: 50%;
   position: relative;
+  margin-left: 40rpx;
 }
 .modal-component .box .top picker.data-v-61712b04::after {
   content: '';

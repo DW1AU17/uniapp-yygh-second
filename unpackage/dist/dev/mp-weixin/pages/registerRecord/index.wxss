@@ -57,13 +57,16 @@
   font-size: 30rpx;
 }
 .reg-record-page .main .border-box .reg-item .bottom {
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
-.reg-record-page .main .border-box .reg-item .bottom .item {
+.reg-record-page .main .border-box .reg-item .bottom > view {
+  padding-top: 8rpx;
+}
+.reg-record-page .main .border-box .reg-item .bottom > view .item {
   line-height: 1.7;
 }
-.reg-record-page .main .border-box .reg-item .bottom .item text {
-  margin-right: 44rpx;
+.reg-record-page .main .border-box .reg-item .bottom > view .item text {
+  margin-right: 32rpx;
 }
 .reg-record-page .main .border-box .reg-item .footer {
   text-align: center;
@@ -76,6 +79,7 @@
   padding: 2px 10px;
   -webkit-border-radius: 3px;
           border-radius: 3px;
+  margin: 0 10rpx;
   margin-top: 5px;
   background-color: #c49d6a;
   color: #fff;

@@ -95,7 +95,7 @@
 			initPavilion() {
 				// 如果store中不存在, 则默认取第一个
 				if (!this.pavilion.orgCode) {
-					this.setPavilion(pavList[0])
+					this.setPavilion(pavList[3])
 				}
 			},
 			/**

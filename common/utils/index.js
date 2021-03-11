@@ -1,10 +1,11 @@
 let pavList = [
-	{ id: '1', orgCode: '1', state: 1, sffName: '东新馆', phone: '0571-56095619', sffSummary: '杭州市东新路737号', img: '/static/pav/dxg.jpg'},
+	{ id: '330003', orgCode: '057196', state: 0, sffName: '东新馆', phone: '0571-56095619', sffSummary: '杭州市东新路737号', img: '/static/pav/dxg.jpg'},
 	{ id: '330006', orgCode: '0571C2', state: 0, sffName: '环西馆', phone: '0571-87099390', sffSummary: '杭州市环城西路92号', img: '/static/pav/hxg.jpg'},
-	{ id: '3', orgCode: '1', state: 1, sffName: '城站馆', phone: '0571-86072747', sffSummary: '杭州市郭东园巷2号', img: '/static/pav/czg.jpg'},
+	{ id: '330005', orgCode: '057173', state: 0, sffName: '城站馆', phone: '0571-86072747', sffSummary: '杭州市郭东园巷2号', img: '/static/pav/czg.jpg'},
 	{ id: '330002', orgCode: '057168', state: 0, sffName: '武林馆', phone: '0571-85216577', sffSummary: '杭州市体育路474号', img: '/static/pav/wlg.jpg'},
-	{ id: '330001', orgCode: '330001', state: 0, sffName: '城西馆', phone: '0571-88080029', sffSummary: '杭州市古墩路632号同人精华', img: '/static/pav/cxg.jpg'},
+	{ id: '330001', orgCode: '057197', state: 0, sffName: '城西馆', phone: '0571-88080029', sffSummary: '杭州市古墩路632号同人精华', img: '/static/pav/cxg.jpg'},
 ]
+
 export { pavList }
 
 /**
@@ -91,18 +92,18 @@ export function CheckImgExists(imgurl) {
 /**
  * 获取路由参数
  */
-export function getUrlParam(string) {
-	let paramString = location.href.split('?')[1]
-	if (paramString) {
-		let paramArray = paramString.split('&')
-		let handleResultObject = {}
-		paramArray.filter(item => {
-			let arr = item.split('=')
-			let key = arr[0]
-			let value = arr[1]
-			handleResultObject[key] = value
-		})
-		return handleResultObject[string]
-	}
-	return ''
-}
+// export function getUrlParam(string) {
+// 	let paramString = location.href.split('?')[1]
+// 	if (paramString) {
+// 		let paramArray = paramString.split('&')
+// 		let handleResultObject = {}
+// 		paramArray.filter(item => {
+// 			let arr = item.split('=')
+// 			let key = arr[0]
+// 			let value = arr[1]
+// 			handleResultObject[key] = value
+// 		})
+// 		return handleResultObject[string]
+// 	}
+// 	return ''
+// }

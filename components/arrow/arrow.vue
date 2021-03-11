@@ -16,7 +16,7 @@
 		width: 100px;
 		color: #fff;
 		text-align: center;
-		animation: move 800ms infinite forwards;
+		animation: move 500ms infinite forwards;
 		position: fixed;
 		bottom: 30%;
 		right: 11%;
@@ -29,13 +29,13 @@
 	
 	@keyframes move {
 		0% {
-			bottom: 30%;
+			bottom: 32%;
 		}
 		50% {
-			bottom: 22%;
+			bottom: 26%;
 		}
 		100% {
-			bottom: 30%;
+			bottom: 32%;
 			display: none;
 		}
 	}

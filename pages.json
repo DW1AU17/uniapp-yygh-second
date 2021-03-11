@@ -106,15 +106,28 @@
 			}
 		},
 		{
-			"path": "pages/video/video",
+			"path": "pages/videoList/videoList",
 			"style": {
 				"navigationBarTitleText": "专家送福"
 			}
 		},
 		{
-			"path": "pages/webView/index",
+			"path": "pages/video/video",
 			"style": {
-				"navigationBarTitleText": "领福袋"
+				"navigationBarTitleText": "专家送福",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/treatmentList/index",
+			"style": {
+				"navigationBarTitleText": "针灸治疗单"
+			}
+		},
+		{
+			"path": "pages/questionnaireSurvey/index",
+			"style": {
+				"navigationBarTitleText": "问卷调查"
 			}
 		}
 	],

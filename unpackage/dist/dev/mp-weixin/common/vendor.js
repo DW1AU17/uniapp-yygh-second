@@ -2832,8 +2832,8 @@ function h5Share(data) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = axios;var _prompt = __webpack_require__(/*! ./prompt.js */ 12);
-var _index = _interopRequireDefault(__webpack_require__(/*! @/store/index */ 15));
-var _index2 = __webpack_require__(/*! ./index.js */ 18);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
+var _index = _interopRequireDefault(__webpack_require__(/*! @/store/index */ 15));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
+// import { getUrlParam } from './index.js'
 
 // 三种情况
 /**
@@ -2851,14 +2851,15 @@ function axios(url) {var data = arguments.length > 1 && arguments[1] !== undefin
   // }
 
   // const BASE_URl = 'https://www.zjgoshine.com:9001/' + prefix;
-  // const BASE_URl = 'https://www.zjgoshine.com:59001/' + prefix;
+  // const BASE_URl = 'https://www.zjgoshine.com:9001/' + prefix;
   var BASE_URl = 'http://192.168.1.190:8085/' + prefix;
-  if (!prefix.includes('app/login') && !url.includes('h5Share')) {var _store$state$pavilion =
+  var white = ['app/wechat', 'app/login'];
+  if (!prefix.includes('app/login')) {var _store$state$pavilion =
     _index.default.state.pavilion,orgCode = _store$state$pavilion.orgCode,hospitalId = _store$state$pavilion.id;
     data = _objectSpread(_objectSpread({},
     data), {}, {
-      orgCode: orgCode || (0, _index2.getUrlParam)('orgCode'),
-      hospitalId: hospitalId || (0, _index2.getUrlParam)('hospitalId') });
+      orgCode: orgCode,
+      hospitalId: hospitalId });
 
   }
   var method = "post";
@@ -2880,7 +2881,6 @@ function axios(url) {var data = arguments.length > 1 && arguments[1] !== undefin
         res.data,code = _res$data.code,message = _res$data.message;
         // 异常提示
         errorHandle(code, message);
-
         resolve(res.data);
       },
       fail: function fail(err) {
@@ -2909,6 +2909,16 @@ function getHeaderInfo(url) {
 function errorHandle(code, message) {
   if (code === 1) {
     (0, _prompt.errorAlert)(message);
+
+    if (message && message.includes('登录信息已过期')) {
+      _index.default.commit('logout');
+      setTimeout(function () {
+        uni.navigateTo({
+          url: '/pages/auth/auth' });
+
+      }, 500);
+    }
+
 
 
 
@@ -4199,125 +4209,6 @@ var index = {
 /***/ }),
 
 /***/ 18:
-/*!****************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/HBuilderProjects/customUI/common/utils/index.js ***!
-  \****************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.getDates = getDates;exports.getWeekFromDate = getWeekFromDate;exports.getPavName = getPavName;exports.CheckImgExists = CheckImgExists;exports.getUrlParam = getUrlParam;exports.pavList = void 0;var pavList = [
-{ id: '1', orgCode: '1', state: 1, sffName: '东新馆', phone: '0571-56095619', sffSummary: '杭州市东新路737号', img: '/static/pav/dxg.jpg' },
-{ id: '330006', orgCode: '0571C2', state: 0, sffName: '环西馆', phone: '0571-87099390', sffSummary: '杭州市环城西路92号', img: '/static/pav/hxg.jpg' },
-{ id: '3', orgCode: '1', state: 1, sffName: '城站馆', phone: '0571-86072747', sffSummary: '杭州市郭东园巷2号', img: '/static/pav/czg.jpg' },
-{ id: '330002', orgCode: '057168', state: 0, sffName: '武林馆', phone: '0571-85216577', sffSummary: '杭州市体育路474号', img: '/static/pav/wlg.jpg' },
-{ id: '330001', orgCode: '330001', state: 0, sffName: '城西馆', phone: '0571-88080029', sffSummary: '杭州市古墩路632号同人精华', img: '/static/pav/cxg.jpg' }];exports.pavList = pavList;
-
-
-
-/**
-                                                                                                                                                                             * 获取日期和周几
-                                                                                                                                                                             */
-function getDates(days) {
-  var todate = formatDate(new Date());
-  var dateArry = [];
-  for (var i = 0; i < days; i++) {
-    var dateObj = dateLater(todate, i);
-    dateArry.push(dateObj);
-  }
-  return dateArry;
-}
-var formatNumber = function formatNumber(n) {
-  n = n.toString();
-  return n[1] ? n : '0' + n;
-};
-var formatDate = function formatDate(date) {
-  var year = date.getFullYear();
-  var month = date.getMonth() + 1;
-  var day = date.getDate();
-  return [year, month, day].map(formatNumber).join('-');
-};
-var id = 0;
-
-function dateLater(dates, later) {
-  var dateObj = {
-    id: id++ };
-
-  var show_day = new Array('周日', '周一', '周二', '周三', '周四', '周五', '周六');
-  var date = new Date(dates);
-  date.setDate(date.getDate() + later);
-  var day = date.getDay();
-  var yearDate = date.getFullYear();
-  var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
-  var dayFormate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
-  dateObj.month = month;
-  dateObj.day = dayFormate;
-  dateObj.week = show_day[day];
-  dateObj.searchDate = yearDate + '-' + month + '-' + dayFormate;
-  return dateObj;
-}
-
-/**
-   * 通过日期获取周
-   */
-function getWeekFromDate(date) {
-  var dt = new Date(date.replace(/-/g, '/'));
-  var weeks = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
-  return weeks[dt.getDay()];
-}
-
-/**
-   * 获取馆名
-   */
-function getPavName(number) {
-  var obj = {
-    '330001': '城西馆',
-    '330002': '武林馆',
-    '330003': '东新馆',
-    '330005': '城站馆',
-    '330006': '环西馆' };
-
-  return obj[number];
-}
-
-/**
-   * 判断图片是否存在
-   */
-function CheckImgExists(imgurl) {
-  return new Promise(function (resolve, reject) {
-    var ImgObj = new Image();
-    ImgObj.src = imgurl;
-    ImgObj.onload = function (res) {
-      resolve(res);
-    };
-    ImgObj.onerror = function (err) {
-      reject(err);
-    };
-  });
-}
-
-/**
-   * 获取路由参数
-   */
-function getUrlParam(string) {
-  var paramString = location.href.split('?')[1];
-  if (paramString) {
-    var paramArray = paramString.split('&');
-    var handleResultObject = {};
-    paramArray.filter(function (item) {
-      var arr = item.split('=');
-      var key = arr[0];
-      var value = arr[1];
-      handleResultObject[key] = value;
-    });
-    return handleResultObject[string];
-  }
-  return '';
-}
-
-/***/ }),
-
-/***/ 19:
 /*!****************************************************************************************!*\
   !*** C:/Users/Administrator/Documents/HBuilderProjects/customUI/common/api/patient.js ***!
   \****************************************************************************************/
@@ -10449,7 +10340,7 @@ internalMixin(Vue);
 
 /***/ }),
 
-/***/ 22:
+/***/ 21:
 /*!**********************************************************************************************************!*\
   !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/runtime/componentNormalizer.js ***!
   \**********************************************************************************************************/
@@ -10575,6 +10466,126 @@ function normalizeComponent (
   }
 }
 
+
+/***/ }),
+
+/***/ 28:
+/*!****************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/HBuilderProjects/customUI/common/utils/index.js ***!
+  \****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.getDates = getDates;exports.getWeekFromDate = getWeekFromDate;exports.getPavName = getPavName;exports.CheckImgExists = CheckImgExists;exports.pavList = void 0;var pavList = [
+{ id: '330003', orgCode: '057196', state: 0, sffName: '东新馆', phone: '0571-56095619', sffSummary: '杭州市东新路737号', img: '/static/pav/dxg.jpg' },
+{ id: '330006', orgCode: '0571C2', state: 0, sffName: '环西馆', phone: '0571-87099390', sffSummary: '杭州市环城西路92号', img: '/static/pav/hxg.jpg' },
+{ id: '330005', orgCode: '057173', state: 0, sffName: '城站馆', phone: '0571-86072747', sffSummary: '杭州市郭东园巷2号', img: '/static/pav/czg.jpg' },
+{ id: '330002', orgCode: '057168', state: 0, sffName: '武林馆', phone: '0571-85216577', sffSummary: '杭州市体育路474号', img: '/static/pav/wlg.jpg' },
+{ id: '330001', orgCode: '057197', state: 0, sffName: '城西馆', phone: '0571-88080029', sffSummary: '杭州市古墩路632号同人精华', img: '/static/pav/cxg.jpg' }];exports.pavList = pavList;
+
+
+
+
+/**
+                                                                                                                                                                             * 获取日期和周几
+                                                                                                                                                                             */
+function getDates(days) {
+  var todate = formatDate(new Date());
+  var dateArry = [];
+  for (var i = 0; i < days; i++) {
+    var dateObj = dateLater(todate, i);
+    dateArry.push(dateObj);
+  }
+  return dateArry;
+}
+var formatNumber = function formatNumber(n) {
+  n = n.toString();
+  return n[1] ? n : '0' + n;
+};
+var formatDate = function formatDate(date) {
+  var year = date.getFullYear();
+  var month = date.getMonth() + 1;
+  var day = date.getDate();
+  return [year, month, day].map(formatNumber).join('-');
+};
+var id = 0;
+
+function dateLater(dates, later) {
+  var dateObj = {
+    id: id++ };
+
+  var show_day = new Array('周日', '周一', '周二', '周三', '周四', '周五', '周六');
+  var date = new Date(dates);
+  date.setDate(date.getDate() + later);
+  var day = date.getDay();
+  var yearDate = date.getFullYear();
+  var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+  var dayFormate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+  dateObj.month = month;
+  dateObj.day = dayFormate;
+  dateObj.week = show_day[day];
+  dateObj.searchDate = yearDate + '-' + month + '-' + dayFormate;
+  return dateObj;
+}
+
+/**
+   * 通过日期获取周
+   */
+function getWeekFromDate(date) {
+  var dt = new Date(date.replace(/-/g, '/'));
+  var weeks = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
+  return weeks[dt.getDay()];
+}
+
+/**
+   * 获取馆名
+   */
+function getPavName(number) {
+  var obj = {
+    '330001': '城西馆',
+    '330002': '武林馆',
+    '330003': '东新馆',
+    '330005': '城站馆',
+    '330006': '环西馆' };
+
+  return obj[number];
+}
+
+/**
+   * 判断图片是否存在
+   */
+function CheckImgExists(imgurl) {
+  return new Promise(function (resolve, reject) {
+    var ImgObj = new Image();
+    ImgObj.src = imgurl;
+    ImgObj.onload = function (res) {
+      resolve(res);
+    };
+    ImgObj.onerror = function (err) {
+      reject(err);
+    };
+  });
+}
+
+/**
+   * 获取路由参数
+   */
+// export function getUrlParam(string) {
+// 	let paramString = location.href.split('?')[1]
+// 	if (paramString) {
+// 		let paramArray = paramString.split('&')
+// 		let handleResultObject = {}
+// 		paramArray.filter(item => {
+// 			let arr = item.split('=')
+// 			let key = arr[0]
+// 			let value = arr[1]
+// 			handleResultObject[key] = value
+// 		})
+// 		return handleResultObject[string]
+// 	}
+// 	return ''
+// }
 
 /***/ }),
 

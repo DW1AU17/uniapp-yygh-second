@@ -9,7 +9,7 @@
 								<image v-if="doctorInfo.sffLoginNum == 0" src="/static/ui/0000.jpg" lazy-load/>
 								<image 
 									v-else
-									:src="'https://www.zjgoshine.com:59001/resource/'+doctorInfo.sffLoginNum+'.jpg'"
+									:src="'https://www.zjgoshine.com:9001/resource/'+doctorInfo.sffLoginNum+'.jpg'"
 									@error="handleError"
 								>
 							</view>
@@ -100,7 +100,7 @@
 <script>
 	import { getSchedulingList, getSourceList, getDoctorInfo } from '@/common/api/register.js'
 	import { getWeekFromDate, getPavName } from '@/common/utils/index'
-	import { mapState, mapGetters } from 'vuex'
+	import { mapState, mapGetters, mapMutations } from 'vuex'
 	export default {
 		data() {
 			return {
@@ -135,6 +135,8 @@
 				this.doctorInfo = option
 				this.option = option
 			}
+			let { orgCode, hospitalId: id } = this.option
+			this.setPavilion({ orgCode, id })
 			// const eventChannel = this.getOpenerEventChannel()
 			// eventChannel.on('doctorInfoFromDocPanel', (data) => {
 			// 	this.doctorInfo = data.data
@@ -163,6 +165,7 @@
 			...mapState(['hasLogin'])
 		},
 		methods: {
+			...mapMutations(['setPavilion']),
 			/**
 			 * 获取排班
 			 */
@@ -283,7 +286,11 @@
 				this.currentIndex = e.detail.value
 			},	
 			goOrderPage() {
-				let data = { ...this.getNumList[this.currentIndex], totalFee: this.totalFee, orgCode: this.doctorInfo.orgCode }
+				let data = { ...this.getNumList[this.currentIndex], 
+					totalFee: this.totalFee, 
+					orgCode: this.doctorInfo.orgCode,
+					pavName: this.doctorInfo.pavName
+				}
 				uni.navigateTo({
 					url: '/pages/order/order',
 					success: res => {

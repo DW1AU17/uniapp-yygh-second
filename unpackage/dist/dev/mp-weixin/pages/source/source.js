@@ -29,7 +29,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _source_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./source.vue?vue&type=script&lang=js& */ 76);
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _source_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _source_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 /* harmony import */ var _source_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./source.vue?vue&type=style&index=0&lang=scss& */ 78);
-/* harmony import */ var _E_hb_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/runtime/componentNormalizer.js */ 22);
+/* harmony import */ var _E_hb_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/runtime/componentNormalizer.js */ 21);
 
 var renderjs
 
@@ -267,7 +267,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var _register = __webpack_require__(/*! @/common/api/register.js */ 53);
-var _index = __webpack_require__(/*! @/common/utils/index */ 18);
+var _index = __webpack_require__(/*! @/common/utils/index */ 28);
 var _vuex = __webpack_require__(/*! vuex */ 16);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var _default =
 {
   data: function data() {
@@ -302,7 +302,9 @@ var _vuex = __webpack_require__(/*! vuex */ 16);function _interopRequireDefault(
     } else {
       this.doctorInfo = option;
       this.option = option;
-    }
+    }var _this$option =
+    this.option,orgCode = _this$option.orgCode,id = _this$option.hospitalId;
+    this.setPavilion({ orgCode: orgCode, id: id });
     // const eventChannel = this.getOpenerEventChannel()
     // eventChannel.on('doctorInfoFromDocPanel', (data) => {
     // 	this.doctorInfo = data.data
@@ -330,10 +332,11 @@ var _vuex = __webpack_require__(/*! vuex */ 16);function _interopRequireDefault(
   computed: _objectSpread({},
   (0, _vuex.mapState)(['hasLogin'])),
 
-  methods: {
+  methods: _objectSpread(_objectSpread({},
+  (0, _vuex.mapMutations)(['setPavilion'])), {}, {
     /**
-              * 获取排班
-              */
+                                                    * 获取排班
+                                                    */
     init: function init() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var _this$doctorInfo, docId, docName, orgCode, hospitalId, data, res;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
                 _this.showLoging();_this$doctorInfo =
                 _this.doctorInfo, docId = _this$doctorInfo.sffId, docName = _this$doctorInfo.sffName, orgCode = _this$doctorInfo.orgCode, hospitalId = _this$doctorInfo.hospitalId;
@@ -451,7 +454,11 @@ var _vuex = __webpack_require__(/*! vuex */ 16);function _interopRequireDefault(
       this.currentIndex = e.detail.value;
     },
     goOrderPage: function goOrderPage() {
-      var data = _objectSpread(_objectSpread({}, this.getNumList[this.currentIndex]), {}, { totalFee: this.totalFee, orgCode: this.doctorInfo.orgCode });
+      var data = _objectSpread(_objectSpread({}, this.getNumList[this.currentIndex]), {}, {
+        totalFee: this.totalFee,
+        orgCode: this.doctorInfo.orgCode,
+        pavName: this.doctorInfo.pavName });
+
       uni.navigateTo({
         url: '/pages/order/order',
         success: function success(res) {
@@ -483,7 +490,7 @@ var _vuex = __webpack_require__(/*! vuex */ 16);function _interopRequireDefault(
     },
     handleError: function handleError(e) {
       this.doctorInfo.sffLoginNum = '0000';
-    } } };exports.default = _default;
+    } }) };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

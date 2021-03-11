@@ -16,7 +16,7 @@
 				<image src="/static/ui/yg.png" mode="widthFix">
 				<view class="text">关于我们</view>
 			</view>
-			<view v-if="inActive" @tap="goVideoPage">
+			<view v-if="inActive" @tap="goPage('videoList')">
 				<image class="rotate" src="/static/ui/fu.png" mode="widthFix">
 				<view class="text">专家送福</view>
 			</view>
@@ -54,12 +54,7 @@
 		{ id: 5, img: '', title: '这个1000多年前的杭州“市长”，是这么养生的…', content: '离任时，他给杭州留下了一湖碧水、六眼清井、百首诗词。回首时，他叹：“日出江花红胜火，春来江水绿如蓝。能不忆江南？江南忆，最忆是杭州。”'},
 	]
 	// 活动日期
-	// const activeDateList = ['2021-02-11', '2021-02-12', '2021-02-13', '2021-02-14', '2021-02-15', '2021-02-16', '2021-02-17', '2021-02-18']
-	
-	
-	const activeDateList = ['2021-02-04', '2021-02-12', '2021-02-13', '2021-02-14', '2021-02-15', '2021-02-16', '2021-02-17', '2021-02-18']
-	
-	
+	const activeDateList = ['2021-02-07', '2021-02-08', '2021-02-09', '2021-02-10', '2021-02-11', '2021-02-12', '2021-02-13', '2021-02-14', '2021-02-15', '2021-02-16', '2021-02-17']
 	
 	import { mapState, mapMutations } from "vuex"
 	import customMap from '@/components/map/map'
@@ -77,12 +72,12 @@
 				}],
 				hidden: true,
 				inActive: false,
-				date: ''
+				day: ''
 			}
 		},
 		created() {
 			let today = getDates(1)[0].searchDate
-			this.date = today
+			this.day = today
 			this.inActive = activeDateList.includes(today)
 		},
 		/**
@@ -122,7 +117,11 @@
 			// 	uni.makePhoneCall({ phoneNumber })
 			// },
 			goPage(type) {
-				uni.navigateTo({ url: `/pages/${type}/${type}` })
+				if (type === 'pavilion' && activeDateList.includes(this.day)) {
+					this.errorAlert('系统升级维护中')
+				} else {
+					uni.navigateTo({ url: `/pages/${type}/${type}` })
+				}
 			},
 			goNewsPage(index) {
 				uni.navigateTo({ 
@@ -136,15 +135,9 @@
 				// #ifdef MP-WEIXIN
 				uni.navigateToMiniProgram({
 				    appId: 'wx692f2eeb703106f0',
-				    // path: 'packages/ump/new-lottery/casino/index?alias=aq7i4g3w0kvo&shopAutoEnter=1',
 					path: ''
 				})
 				// #endif
-			},
-			goVideoPage() {
-				uni.navigateTo({
-					url: `/pages/video/video?date=${this.date}`
-				})
 			},
 			showError() {
 				this.errorAlert('暂未开放')

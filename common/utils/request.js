@@ -1,6 +1,6 @@
 import { errorAlert } from './prompt.js'
 import store from '@/store/index'
-import { getUrlParam } from './index.js'
+// import { getUrlParam } from './index.js'
 
 // 三种情况
 /**
@@ -18,14 +18,15 @@ export default function axios(url, data = {}, prefix = 'app/register/') {
 	// }
 	
 	// const BASE_URl = 'https://www.zjgoshine.com:9001/' + prefix;
-	// const BASE_URl = 'https://www.zjgoshine.com:59001/' + prefix;
+	// const BASE_URl = 'https://www.zjgoshine.com:9001/' + prefix;
 	const BASE_URl = 'http://192.168.1.190:8085/' + prefix;
-	if (!prefix.includes('app/login') && !url.includes('h5Share')) {
+	let white = ['app/wechat', 'app/login']
+	if (!prefix.includes('app/login')) {
 		let { orgCode, id: hospitalId } = store.state.pavilion
 		data = {
 			...data,
-			orgCode: orgCode || getUrlParam('orgCode'),
-			hospitalId: hospitalId || getUrlParam('hospitalId')
+			orgCode,
+			hospitalId
 		}
 	}
 	let method = "post"
@@ -47,7 +48,6 @@ export default function axios(url, data = {}, prefix = 'app/register/') {
 				let { code, message } = res.data
 				// 异常提示
 				errorHandle(code, message)
-				
 				resolve(res.data)
 			},
 			fail(err) {
@@ -76,6 +76,16 @@ function getHeaderInfo(url) {
 function errorHandle(code, message) {
 	if (code === 1) {
 		errorAlert(message)
+		// #ifdef MP-WEIXIN
+		if (message && message.includes('登录信息已过期')) {
+			store.commit('logout')
+			setTimeout(() => {
+				uni.navigateTo({
+					url: '/pages/auth/auth'
+				})					
+			}, 500)
+		}
+		// #endif
 		// #ifdef H5
 		if (message && message.includes('请重新登录')) {
 			uni.navigateTo({

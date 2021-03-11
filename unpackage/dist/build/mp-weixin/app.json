@@ -16,7 +16,10 @@
     "pages/search/search",
     "pages/auth/auth",
     "pages/about/about",
-    "pages/news/news"
+    "pages/news/news",
+    "pages/videoList/videoList",
+    "pages/video/video",
+    "pages/treatmentList/index"
   ],
   "subPackages": [],
   "window": {
@@ -45,5 +48,6 @@
       }
     ]
   },
-  "usingComponents": {}
+  "usingComponents": {},
+  "sitemapLocation": "sitemap.json"
 }

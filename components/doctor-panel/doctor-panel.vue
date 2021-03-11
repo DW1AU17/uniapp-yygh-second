@@ -2,12 +2,12 @@
 	<view class="border-box">
 		<view class="single-item border-box-inner gradient" @tap="goSourcePage">
 			<view class="pic">
-				<!-- <image v-if="source.img == 0" src="/static/ui/0000.jpg" lazy-load/> -->
-				<image :src="'https://www.zjgoshine.com:59001/resource/'+source.img+'.jpg'" @error="handleError" lazy-load/>
+				<!-- <image src="/static/ui/0007.jpg" lazy-load/> -->
+				<image :src="'https://www.zjgoshine.com:9001/resource/'+source.img+'.jpg'" @error="handleError" lazy-load/>
 			</view>
 			<view class="right">
 				<view>
-					<text class="doc-name">{{source.name}} {{source.img}}</text>
+					<text class="doc-name">{{source.name}}</text>
 					<text class="post">{{source.title}}</text>
 				</view>
 				<view class="introduce">
@@ -48,7 +48,7 @@
 			},
 			handleError(e) {
 				console.log(123)
-				// this.$emit('editImgUrl', { url: '0000', name: this.source.name, id: this.source.id })
+				this.$emit('editImgUrl', { url: '0000', name: this.source.name, id: this.source.id })
 			}
 		}
 	}

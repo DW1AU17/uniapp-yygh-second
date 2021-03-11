@@ -17,8 +17,9 @@
     "pages/auth/auth",
     "pages/about/about",
     "pages/news/news",
+    "pages/videoList/videoList",
     "pages/video/video",
-    "pages/webView/index"
+    "pages/treatmentList/index"
   ],
   "subPackages": [],
   "window": {
@@ -48,5 +49,5 @@
     ]
   },
   "usingComponents": {},
-  "sitemapLocation": "sitemap97.json"
+  "sitemapLocation": "sitemap52.json"
 }

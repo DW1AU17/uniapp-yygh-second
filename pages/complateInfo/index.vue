@@ -101,7 +101,6 @@
 								url: `/pages/tabBar/${this.type}/${this.type}`
 							})
 						} else {
-							console.log(this.type)
 							uni.navigateBack({ delta: 1 })
 						}
 					}
@@ -111,7 +110,7 @@
 				}
 			},
 			bindPickerChange(e) {
-				this.ruleForm.certifiNum = e.target.value
+				this.ruleForm.cardType = e.target.value
 			}
 		}
 	}

@@ -39,7 +39,6 @@
 			 * 获取手机号
 			 */
 			async getPhoneNumber(e) {
-				console.log(e)
 				let { detail: { encryptedData, iv, errMsg } } = e
 				if (errMsg === 'getPhoneNumber:ok') {
 					let { openId, sessionKey } = this.wechatToken
@@ -61,9 +60,13 @@
 									this.setPatientList(patRes.data)
 									this.successAlert('登录成功')
 									// 登录成功
-									uni.switchTab({
-										url: `/pages/tabBar/${this.type}/${this.type}`
-									})
+									if (this.type) {
+										uni.switchTab({
+											url: `/pages/tabBar/${this.type}/${this.type}`
+										})
+									} else {
+										uni.navigateBack()
+									}
 								} else {
 									// 完善信息
 									uni.redirectTo({

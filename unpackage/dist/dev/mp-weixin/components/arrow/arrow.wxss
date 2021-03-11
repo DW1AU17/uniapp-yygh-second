@@ -10,8 +10,8 @@
   width: 100px;
   color: #fff;
   text-align: center;
-  -webkit-animation: move-data-v-1b6499d0 800ms infinite forwards;
-          animation: move-data-v-1b6499d0 800ms infinite forwards;
+  -webkit-animation: move-data-v-1b6499d0 500ms infinite forwards;
+          animation: move-data-v-1b6499d0 500ms infinite forwards;
   position: fixed;
   bottom: 30%;
   right: 11%;
@@ -24,25 +24,25 @@
 }
 @-webkit-keyframes move-data-v-1b6499d0 {
 0% {
-    bottom: 30%;
+    bottom: 32%;
 }
 50% {
-    bottom: 22%;
+    bottom: 26%;
 }
 100% {
-    bottom: 30%;
+    bottom: 32%;
     display: none;
 }
 }
 @keyframes move-data-v-1b6499d0 {
 0% {
-    bottom: 30%;
+    bottom: 32%;
 }
 50% {
-    bottom: 22%;
+    bottom: 26%;
 }
 100% {
-    bottom: 30%;
+    bottom: 32%;
     display: none;
 }
 }
