@@ -1,5 +1,5 @@
 <template>
-	<radio-group v-bind="$attrs" v-on="$listeners" @change="$emit('input', $event.detail.value)">
+	<radio-group @change="$emit('input', $event.detail.value)">
 		<label v-for="item in list" :key="item.value">
 			<radio :value="item.value" :checked="value === item.value" />{{ item.label }}
 		</label>
@@ -22,6 +22,7 @@
 
 <style>
 	label {
-		margin-right: 10px; 
+		margin-bottom: 12rpx; 
+		display: block;
 	}
 </style>

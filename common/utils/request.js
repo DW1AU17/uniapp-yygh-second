@@ -21,7 +21,7 @@ export default function axios(url, data = {}, prefix = 'app/register/') {
 	// const BASE_URl = 'https://www.zjgoshine.com:9001/' + prefix;
 	const BASE_URl = 'http://192.168.1.190:8085/' + prefix;
 	let white = ['app/wechat', 'app/login']
-	if (!prefix.includes('app/login')) {
+	if (!prefix.includes('app/login') && !data.length) {
 		let { orgCode, id: hospitalId } = store.state.pavilion
 		data = {
 			...data,
@@ -30,7 +30,9 @@ export default function axios(url, data = {}, prefix = 'app/register/') {
 		}
 	}
 	let method = "post"
-	if (Object.keys(data).length === 0) {
+	if (data.length) {
+		method = "post"
+	} else if (Object.keys(data).length === 0) {
 		method = "get"
 	}
 	// 非登录页添加请求头

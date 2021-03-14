@@ -1,5 +1,5 @@
 <template>
-	<checkbox-group v-bind="$attrs" v-on="$listeners" @change="$emit('input', $event.target.value)">
+	<checkbox-group @change="$emit('input', $event.target.value)">
 		<label v-for="(item, index) in list" :key="index">
 			<checkbox :value="item.value" :checked="value.includes(item.value)"/> {{ item.label }}
 		</label>
@@ -21,4 +21,8 @@
 </script>
 
 <style>
+	label {
+		margin-bottom: 12rpx; 
+		display: block;
+	}
 </style>
