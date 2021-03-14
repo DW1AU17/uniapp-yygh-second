@@ -56,7 +56,7 @@
 
 <script>
 	// #ifdef H5
-	import jweixin from 'jweixin-module'
+	// import jweixin from 'jweixin-module'
 	// #endif
 	import { h5Share } from '@/common/api/wechat'
 	export default {
@@ -68,41 +68,41 @@
 		},
 		onLoad() {
 			// #ifdef H5
-			this.share()
+			// this.share()
 			// #endif
 		},
 		methods: {
-			async share() {
-				return 
-				let res = await h5Share({url: location.href.split('#')[0]})
-				let { appId, nonceStr, signature, timestamp } = res.data
-				jweixin.config({
-					debug: true,  //测试时候用true 能看见wx.config的状态是否是config:ok
-					appId, // 必填，公众号的唯一标识（公众号的APPid）
-					timestamp, // 必填，生成签名的时间戳
-					nonceStr, // 必填，生成签名的随机串
-					signature, // 必填，签名
-					jsApiList: [
-						'onMenuShareTimeline', // 分享给好友
-						'onMenuShareAppMessage', // 分享到朋友圈
-					], // 必填，需要使用的JS接口列表
-				});
-				return
-				jweixin.ready(function() {
-					console.log('通过')
-					var shareData = {
-						title: '测试的标题', // 分享标题
-						desc: '测试的描述', // 分享描述
-						link: 'www.baidu.com', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-						imgUrl: '@/static/naruto.png', // 分享图标
-						success: function(res) {}
-					};
-					//自定义“分享到朋友圈”及“分享到QQ空间”按钮的分享内容（1.4.0）
-					jweixin.updateTimelineShareData(shareData);
-					//自定义“分享给朋友”及“分享到QQ”按钮的分享内容（1.4.0）
-					jweixin.updateAppMessageShareData(shareData);
-				})
-			},
+			// async share() {
+			// 	return 
+			// 	let res = await h5Share({url: location.href.split('#')[0]})
+			// 	let { appId, nonceStr, signature, timestamp } = res.data
+			// 	jweixin.config({
+			// 		debug: true,  //测试时候用true 能看见wx.config的状态是否是config:ok
+			// 		appId, // 必填，公众号的唯一标识（公众号的APPid）
+			// 		timestamp, // 必填，生成签名的时间戳
+			// 		nonceStr, // 必填，生成签名的随机串
+			// 		signature, // 必填，签名
+			// 		jsApiList: [
+			// 			'onMenuShareTimeline', // 分享给好友
+			// 			'onMenuShareAppMessage', // 分享到朋友圈
+			// 		], // 必填，需要使用的JS接口列表
+			// 	});
+			// 	return
+			// 	jweixin.ready(function() {
+			// 		console.log('通过')
+			// 		var shareData = {
+			// 			title: '测试的标题', // 分享标题
+			// 			desc: '测试的描述', // 分享描述
+			// 			link: 'www.baidu.com', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+			// 			imgUrl: '@/static/naruto.png', // 分享图标
+			// 			success: function(res) {}
+			// 		};
+			// 		//自定义“分享到朋友圈”及“分享到QQ空间”按钮的分享内容（1.4.0）
+			// 		jweixin.updateTimelineShareData(shareData);
+			// 		//自定义“分享给朋友”及“分享到QQ”按钮的分享内容（1.4.0）
+			// 		jweixin.updateAppMessageShareData(shareData);
+			// 	})
+			// },
 			goPavilionPage() {
 				if (!this.checked) {
 					this.errorAlert('请阅读并同意挂号须知')

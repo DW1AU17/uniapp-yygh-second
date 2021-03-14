@@ -20,9 +20,17 @@
 	}
 </script>
 
-<style>
-	label {
-		margin-bottom: 12rpx; 
-		display: block;
+<style lang="scss">
+	checkbox-group {
+		label {
+			padding: 6rpx 0 12rpx 0;
+			display: block;
+			border-bottom: 1rpx solid #eee;
+		}
+		/deep/ .uni-checkbox-input {
+			width: 38rpx;
+			height: 38rpx;
+			margin-bottom: 4rpx;
+		}
 	}
 </style>

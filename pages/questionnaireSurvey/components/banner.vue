@@ -10,10 +10,7 @@
 </script>
 
 <style lang="scss">
-	// $common-width: 675rpx;
 	.banner {
-		// height: 174rpx;
-		// width: $common-width;
 		margin: 32rpx 38rpx 24rpx;
 		position: relative;
 		&:after, &:before {

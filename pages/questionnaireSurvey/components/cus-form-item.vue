@@ -1,5 +1,5 @@
 <template>
-	<view class="cus-form-item">
+	<view class="cus-form-item" :class="{'flex': type === '3'}">
 		<view class="label">{{ label }}</view>
 		<view class="item">
 			<slot></slot>
@@ -17,6 +17,9 @@
 			placeholder: {
 				type: String,
 				default: ''
+			},
+			type: {
+				default: ''
 			}
 		}
 	}
@@ -24,15 +27,24 @@
 
 <style lang="scss">
 	.cus-form-item {
-		display: flex;
-		margin-bottom: 20rpx;
-		.label {
-			width: 80px;
-			line-height: 1.5;
-		}
+		margin-top: 20rpx;
 		.item {
 			flex: 1;
 			padding-left: 20rpx;
+			margin-top: 20rpx;
+		}
+		.label {
+			font-size: 30rpx;
+			font-weight: 700;
+		}
+		&.flex {
+			display: flex;
+			.label {
+				width: 120rpx;
+			}
+			.item {
+				margin-top: 0;
+			}
 		}
 	}
 </style>
