@@ -223,6 +223,7 @@
 			.item {
 				display: flex;
 				padding: 0 30rpx;
+				margin-bottom: 24rpx;
 				.left {
 					width: 85px;
 				}

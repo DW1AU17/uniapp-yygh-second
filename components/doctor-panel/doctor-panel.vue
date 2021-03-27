@@ -3,7 +3,7 @@
 		<view class="single-item border-box-inner gradient" @tap="goSourcePage">
 			<view class="pic">
 				<!-- <image src="/static/ui/0007.jpg" lazy-load/> -->
-				<image :src="'https://www.zjgoshine.com:9001/resource/'+source.img+'.jpg'" @error="handleError" lazy-load/>
+				<image :src="'https://www.zjgoshine.com:9001/resource/'+source.img+'.jpg'" @error="handleError" mode="aspectFill" lazy-load/>
 			</view>
 			<view class="right">
 				<view>

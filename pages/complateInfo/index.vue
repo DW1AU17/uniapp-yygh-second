@@ -82,7 +82,6 @@
 				let { ret, msg } = validateForm(data, rules)
 				if (ret) {
 					this.showLoging()
-					
 					// 调接口
 					let { code } = await updatePatient(data)
 					if (code == 0) {

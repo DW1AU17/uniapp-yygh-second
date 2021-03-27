@@ -19,11 +19,15 @@
 		data() {
 			return {
 				sourceData: {},
-				type: ''
+				type: '',
+				page: '', // 跳转的页面路径
+				skip: '', // 是否跳过完善信息
 			}
 		},
-		onLoad({ type }) {
+		onLoad({ type, page, skip }) {
 			this.type = type
+			this.page = page
+			this.skip = skip
 			const eventChannel = this.getOpenerEventChannel()
 			eventChannel.on('loginDataFromMine', (data) => {
 				let { rawData, signature } = data.data
@@ -39,6 +43,7 @@
 			 * 获取手机号
 			 */
 			async getPhoneNumber(e) {
+				this.showLoging()
 				let { detail: { encryptedData, iv, errMsg } } = e
 				if (errMsg === 'getPhoneNumber:ok') {
 					let { openId, sessionKey } = this.wechatToken
@@ -48,24 +53,35 @@
 					if (res.code === 0) {
 						let { needRegisterFlag, pubUser } = res.data
 						if (needRegisterFlag === '0') {
-							if (pubUser) {
-								let { username, idCard, phoneNumber, id } = pubUser
-								// 存到store中
+							// 活动页不需要完善个人信息
+							if (this.skip) { 
 								this.setPatientInfo(pubUser)
-								if (username && idCard) {
-									// 否 登录成功 (保存用户信息, token携带在其中)
-									this.login()
-									/* 获取/设置就诊人列表 */
-									let patRes = await getPatientList({ userId: pubUser.id })
-									this.setPatientList(patRes.data)
-									this.successAlert('登录成功')
-									// 登录成功
-									if (this.type) {
-										uni.switchTab({
-											url: `/pages/tabBar/${this.type}/${this.type}`
-										})
+								uni.navigateBack()
+							} else {
+								if (pubUser) {
+									let { username, idCard, phoneNumber, id } = pubUser
+									// 存到store中
+									this.setPatientInfo(pubUser)
+									if (username && idCard) {
+										// 否 登录成功 (保存用户信息, token携带在其中)
+										this.login()
+										/* 获取/设置就诊人列表 */
+										let patRes = await getPatientList({ userId: pubUser.id })
+										this.setPatientList(patRes.data)
+										this.successAlert('登录成功')
+										// 登录成功
+										if (this.type) {
+											uni.switchTab({
+												url: `/pages/tabBar/${this.type}/${this.type}`
+											})
+										} else {
+											uni.navigateBack()
+										}
 									} else {
-										uni.navigateBack()
+										// 完善信息
+										uni.redirectTo({
+											url: `/pages/complateInfo/index?p=${phoneNumber}&id=${id}&type=${this.type}`
+										})
 									}
 								} else {
 									// 完善信息
@@ -73,17 +89,17 @@
 										url: `/pages/complateInfo/index?p=${phoneNumber}&id=${id}&type=${this.type}`
 									})
 								}
-							} else {
-								// 完善信息
-								uni.redirectTo({
-									url: `/pages/complateInfo/index?p=${phoneNumber}&id=${id}&type=${this.type}`
-								})
 							}
+						} else {
+							this.errorAlert(needRegisterFlag)
 						}
+					} else {
+						this.errorAlert(res.message)
 					}
 				} else {
 					this.errorAlert('取消操作')
 				}
+				uni.hideLoading()
 			},
 		}
 	}

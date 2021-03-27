@@ -11,6 +11,7 @@
 									v-else
 									:src="'https://www.zjgoshine.com:9001/resource/'+doctorInfo.sffLoginNum+'.jpg'"
 									@error="handleError"
+									mode="aspectFill"
 								>
 							</view>
 							<view class="doc-name">{{doctorInfo.sffName}}</view>
@@ -58,8 +59,7 @@
 												>总{{item.numcount}}剩{{item.numremain}}</text>
 											</text>
 											<text v-if="item.state !== 1 && item.numremain != 0 && item.numberReleasedFlag">即将放号</text>
-											<text class="btn disabled" v-else-if="item.state !== 1 && item.numremain == 0">已无号源</text>
-											
+											<text class="btn disabled" v-else-if="item.state !== 1 && item.numremain == 0">已满</text>
 										</view>	
 									</view>
 								</view>

@@ -18,8 +18,9 @@
 		line-height: 70rpx;
 		text-align: center;
 		background-color: transparent!important;
-		font-size: 24rpx;
+		font-size: 28rpx;
 		font-weight: 700;
+		transform: scale(1.1);
 	}
 	.c-purple {
 		background: url(../../../static/ui/growth/purple-btn.png) no-repeat;

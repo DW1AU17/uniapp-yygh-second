@@ -26,7 +26,7 @@
 							</view>
 						</view>
 						<view class="footer">
-							<text v-if="item.appStatus == 0" @tap="cancelReg(item)">取消预约</text>
+							<text v-if="item.appStatus == 0 && item.appWay == 4" @tap="cancelReg(item)">取消预约</text>
 							<text @tap="orderAgain(item)">再次预约</text>
 						</view>
 					</view>

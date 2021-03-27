@@ -57,11 +57,20 @@ page>view {
 .mr10 {
 	margin-right: 10px;
 }
+.ml10 {
+	margin-left: 10px;
+}
 .mt10 {
 	margin-top: 10rpx;
 }
 .mb10 {
 	margin-bottom: 10rpx;
+}
+.mb50 {
+	margin-bottom: 50rpx;
+}
+.mb0 {
+	margin-bottom: 0!important;
 }
 .fwb {
 	font-weight: 700;
@@ -216,4 +225,11 @@ img {
 	border: 1rpx solid #f6a097;
 	border-radius: 28rpx;
 	padding: 28rpx 40rpx;
+}
+
+.default-flex {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
 }

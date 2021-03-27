@@ -1,5 +1,5 @@
 <template>
-	<checkbox-group @change="$emit('input', $event.target.value)">
+	<checkbox-group @change="handleChange">
 		<label v-for="(item, index) in list" :key="index">
 			<checkbox :value="item.value" :checked="value.includes(item.value)"/> {{ item.label }}
 		</label>
@@ -15,6 +15,14 @@
 			},
 			value: {
 				type: Array
+			},
+			field: {
+				type: String
+			}
+		},
+		methods: {
+			handleChange($event) {
+				this.$emit('input', { value: $event.detail.value, field: this.field })
 			}
 		}
 	}

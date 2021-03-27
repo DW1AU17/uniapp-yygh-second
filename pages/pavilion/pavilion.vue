@@ -9,7 +9,7 @@
 		<view class="remind">
 			<view class="title">预约挂号须知</view>
 			<view class="single">
-				<view>1. 预约号源的统一放号时间为提前一周下午3点整</view>
+				<view>1. 预约号源的统一放号时间为提前一周下午2点整</view>
 				<view>2. 预约成功后的记录, 可在"个人中心"下"挂号记录"中查询</view>
 			</view>
 		</view>

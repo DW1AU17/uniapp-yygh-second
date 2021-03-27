@@ -2,16 +2,24 @@
 	<view class="banner answer-box">
 		<image src="../../../static/ui/growth/title1.png" mode="aspectFit"/>
 		<text class="fc666 title">预约专家 获取生长建议</text>
-		<text class="btn">立即预约</text>
+		<text class="btn" @tap="goDoctorPage">立即预约</text>
 	</view>
 </template>
 
 <script>
+	export default {
+		methods: {
+			// 跳转到医生选择界面
+			goDoctorPage() {
+				this.$emit('go')
+			}
+		}
+	}
 </script>
 
 <style lang="scss">
 	.banner {
-		margin: 32rpx 38rpx 24rpx;
+		margin: 60rpx 30rpx 24rpx;
 		position: relative;
 		&:after, &:before {
 			content: '';
@@ -38,13 +46,12 @@
 		}
 		.btn {
 			display: inline-block;
-			font-size: 24rpx;
-			height: 30rpx;
-			line-height: 30rpx;
-			padding: 0 16rpx;
+			font-size: 28rpx;
+			line-height: 46rpx;
+			padding: 0 26rpx;
 			color: #fff;
 			background-color: #f17a05;
-			border-radius: 15rpx;
+			border-radius: 23rpx;
 			margin-left: 30rpx;
 		}
 	}

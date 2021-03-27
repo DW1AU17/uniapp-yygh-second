@@ -11,7 +11,6 @@
 	.table-header {
 		height: 100rpx;
 		text-align: center;
-		line-height: 116rpx;
 		color: #c63a7b;
 		font-size: 34rpx;
 		font-weight: 700;
