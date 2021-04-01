@@ -76,10 +76,14 @@
 			...mapMutations(['login', 'setPatientInfo', 'setPatientList']),
 			async formSubmit() {
 				let data = this.ruleForm
-				if (data.certifiNum != 0) { // 其他证件类型不校验
+				if (data.cardType != '0') { // 其他证件类型不校验
 					rules = rules.slice(0,1)
+					if (!data.idCard) {
+						return this.errorAlert('证件号码不能为空')
+					}
 				}
 				let { ret, msg } = validateForm(data, rules)
+				
 				if (ret) {
 					this.showLoging()
 					// 调接口

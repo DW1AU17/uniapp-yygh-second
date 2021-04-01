@@ -5,7 +5,7 @@
 				<form>
 					<view class="cus-form-item">
 						<view class="cus-title">姓名</view>
-						<input class="cus-input" :disabled="type === 'edit'" v-model="ruleForm.userName" focus placeholder="请输入姓名" />
+						<input class="cus-input" v-model="ruleForm.userName" focus placeholder="请输入姓名" />
 					</view>
 					<view class="cus-form-item">
 						<view class="cus-title">手机号</view>
@@ -19,10 +19,15 @@
 					</view>
 					<view class="cus-form-item">
 						<view class="cus-title">身份证</view>
-						<input class="cus-input" :disabled="type === 'edit'" v-model="ruleForm.cardCode" placeholder="请输入身份证" />
+						<input class="cus-input" v-model="ruleForm.cardCode" placeholder="请输入身份证" />
 					</view>
 				</form>
-				<view class="btn-delete" @tap="delPatient" v-show="type === 'edit'">解绑</view>
+				<view 
+					class="btn-delete" 
+					@tap="delPatient" 
+					v-show="type === 'edit' && patientInfo.idCard != ruleForm.cardCode">
+					解绑
+				</view>
 			</view>
 		</view>
 		<view class="remind">
@@ -90,19 +95,22 @@
 		methods: {
 			...mapMutations(['addPatient', 'deletePatient']),
 			async formSubmit() {
+				let formRules = JSON.parse(JSON.stringify(rules))
 				let data = this.ruleForm
 				if (data.cardType != 0) { // 其他证件类型不校验
-					rules = rules.slice(0,2)
+					formRules = rules.slice(0,2)
 					if (!data.cardCode) {
 						return this.errorAlert('证件号码不能为空')
 					}
 				}
-				let { ret, msg } = validateForm(data, rules)
+				
+				let { ret, msg } = validateForm(data, formRules)
+				
 				if (ret) {
 					let res = await addPatient(data)
 					if (res.code == 0) {
 						/* 添加信息到store中 */
-						this.addPatient(data)
+						this.addPatient({ obj: data, type: this.type })
 						this.successAlert('添加成功')
 						setTimeout(() => {
 							uni.navigateBack({ delta: 1 })

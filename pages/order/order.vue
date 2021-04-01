@@ -35,7 +35,7 @@
 					<text class="base-color fs26" @tap="goAddPage">+添加就诊人</text>
 				</view>
 				<view class="patient common-detail">
-					<view v-for="(item, index) in patientList" :key="item.patId" class="item">
+					<view v-for="(item, index) in patientList" v-if="item.state != 1 || (item.cardCode == patientInfo.idCard)" :key="item.patId" class="item">
 						<view class="left">
 							<radio :checked="currentIndex == index" @tap="currentIndex = index" color="#d09c5b" />
 						</view>
@@ -77,6 +77,7 @@
 			}
 		},
 		onLoad() {
+			this.patientInfo = uni.getStorageSync('patInfo') || {}
 			// 接受source页面传递的数据
 			const eventChannel = this.getOpenerEventChannel()
 			eventChannel.on('orderPageAcceptData', (data) => {
@@ -130,6 +131,7 @@
 					let { timeState, id: sourceDetailId, schedulingId, schedulingDate: visitDate, orgCode } = this.orderInfo
 					orgCode = orgCode || this.orgCode
 					let data = { timeState, sourceDetailId, schedulingId, visitDate, orgCode, patId }
+					
 					/* 提交预约信息 */ 
 					let res = await commitRegisterInfo(data)
 					if (res.code == 0) {

@@ -13,12 +13,10 @@
 	export default {
 		onLaunch: async function() {
 			// #ifdef MP-WEIXIN
-			// 调用微信登录
-			if (!uni.getStorageSync('checkSession') || !this.wechatToken.sessionKey) {
+				// 调用微信登录
 				await this.checkSessionKey()
-			}
-			// 判断小程序是否有更新
-			this.checkUpdateMessage()
+				// 判断小程序是否有更新
+				this.checkUpdateMessage()
 			// #endif
 			
 			// uni.connectSocket({
@@ -53,9 +51,6 @@
 			 * 判断sessionKey是否已经过期
 			 */
 			async checkSessionKey() {
-				// 设置
-				uni.setStorageSync('checkSession', true)
-
 				// 获取 session 状态
 				let res = await judgeSessionKeyExpired()
 				if (res.code === 1 || Object.keys(this.wechatToken).length === 0) {

@@ -52,7 +52,7 @@
 					let res = await wechatHandleUserInfo(params)
 					if (res.code === 0) {
 						let { needRegisterFlag, pubUser } = res.data
-						if (needRegisterFlag === '0') {
+						if (needRegisterFlag === '0') {							
 							// 活动页不需要完善个人信息
 							if (this.skip) { 
 								this.setPatientInfo(pubUser)

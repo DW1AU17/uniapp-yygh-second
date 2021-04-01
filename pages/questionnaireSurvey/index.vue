@@ -121,7 +121,7 @@
 				list,
 				questionList,
 				doctorList,
-				currentIndex: 3, // 轮播图当前页
+				currentIndex: 0, // 轮播图当前页
 				ruleForm: {
 					name: '',
 					birthday: '2000-01',
@@ -347,7 +347,7 @@
 			},
 			moreNews() {
 				uni.navigateTo({
-					url: `/pages/news/news?index=5`
+					url: '/pages/news/growth-new'
 				})
 			},
 			// async getDoctorList() {

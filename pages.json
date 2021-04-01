@@ -125,6 +125,12 @@
 			}
 		},
 		{
+			"path": "pages/news/growth-new",
+			"style": {
+				"navigationBarTitleText": "生长发育"
+			}
+		},
+		{
 			"path": "pages/questionnaireSurvey/index",
 			"style": {
 				"navigationBarTitleText": "问卷调查",

@@ -6,6 +6,7 @@
 				class="common-detail border-box" 
 				v-for="(item, index) in patientList" 
 				:key="item.id"
+				v-if="item.state != 1 || (item.cardCode == patientInfo.idCard)"
 			>
 				<view class="border-box-inner gradient">
 					<view class="top">

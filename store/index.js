@@ -77,8 +77,13 @@ const store = new Vuex.Store({
 		/**
 		 * 添加就诊人
 		 */
-		addPatient(state, obj) {
+		addPatient(state, { obj, type = 'add' }) {
+			console.log(123)
+			if (type === 'edit') {
+				state.patientList = state.patientList.filter(item => item.userName != obj.userName)
+			}
 			state.patientList.push(obj)
+			
 			// #ifdef MP-WEIXIN
 			uni.setStorageSync('patList', state.patientList)
 			// #endif
