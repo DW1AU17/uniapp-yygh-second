@@ -37,9 +37,9 @@
 				<view>2. 最多可添加5位就诊人</view>
 			</view>
 		</view>
-		
 		<view class="cus-footer">
 			<button type="default" class="btn-footer" @tap="formSubmit">保存</button>
+			<button type='warn' class="btn-footer" @tap="testData">测试数据</button>
 		</view>
 		
 	</view>
@@ -48,6 +48,7 @@
 <script>
 	import validateForm from '@/common/utils/validateForm.js'
 	import { addPatient, removePatient } from '@/common/api/patient.js'
+	import {ChineseIDCardNumberGenerator,ChineseMobileGenerator,ChineseNameGenerator} from '@/common/utils/testdata.js'
 	import { mapState, mapMutations } from 'vuex'
 	let rules = [
 		{ prop: 'userName' },
@@ -141,7 +142,12 @@
 			},
 			bindPickerChange(e) {
 				this.ruleForm.cardType = e.target.value
-			}
+			},
+			testData: function (){
+			      this.ruleForm.userName = ChineseNameGenerator();
+			      this.ruleForm.phoneNumber   = ChineseMobileGenerator();
+			      this.ruleForm.cardCode = ChineseIDCardNumberGenerator();
+			    },
 		}
 	}
 </script>
