@@ -39,7 +39,7 @@
 		</view>
 		<view class="cus-footer">
 			<button type="default" class="btn-footer" @tap="formSubmit">保存</button>
-			<button type='warn' class="btn-footer" @tap="testData">测试数据</button>
+			<button type='primary' class="btn-footer" @tap="testData">测试数据</button>
 		</view>
 		
 	</view>
