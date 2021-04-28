@@ -12,22 +12,23 @@
 					<view class="top">
 						<view class="det-left" @tap="choosePatient(item)">
 							<view class="item">
-								<!-- <text class="left">姓名</text> -->
+								<text class="left">姓名</text>
 								<text class="right fs36 fc000">{{item.userName}}</text>
+								<text class="real-name" :class="{'none': item.isRealName == '0'}">{{ item.isRealName == '1' ? '已实名' : '未实名'}}</text>
 							</view>
 							<view class="item">
-								<!-- <text class="left">身份证</text> -->
+								<text class="left">身份证</text>
 								<text class="right fc999 fs24">{{formatIDCard(item.cardCode)}}</text>
 							</view>
 							<view class="item">
-								<!-- <text class="left">电话</text> -->
+								<text class="left">电话</text>
 								<text class="right fc999 fs24">{{formatPhone(item.phoneNumber)}}</text>
 							</view>
 						</view>
 					</view>
 					<view class="bottom">
 						<!-- <view class="btn" @tap="delPatient(item)" v-if="item.idCard != idCard">解绑</view> -->
-						<image src="/static/ui/edit.png" @tap="editPatientInfo(item)"></image>
+						<image src="/static/ui/edit.png" @tap="editPatientInfo(item)" v-if="item.isRealName == '0'"></image>
 						<view class="switch">
 							<radio 
 								color="#bb8d4c"
@@ -235,6 +236,19 @@
 					.item {
 						display: flex;
 						line-height: 50rpx;
+						.real-name {
+							color: #bb8d4c;
+							border-radius: 10px;
+							border: 1px solid;
+							display: inline-block;
+							padding: 0 6px;
+							font-size: 12px;
+							line-height: 20px;
+							height: 20px;
+							.none {
+								color: #888!important;
+							}
+						}
 						.left {
 							color: #999;
 							font-size: 26rpx;

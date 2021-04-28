@@ -1,15 +1,7 @@
 <script>
-	import {
-		judgeSessionKeyExpired,
-		getOpenIdAndSessionKey
-	} from "@/common/utils/wechat"
-	import {
-		mapState,
-		mapMutations
-	} from "vuex"
-	import {
-		getPatientList
-	} from '@/common/api/patient'
+	import { judgeSessionKeyExpired, getOpenIdAndSessionKey } from "@/common/utils/wechat"
+	import { mapState, mapMutations } from "vuex"
+	import { getPatientList } from '@/common/api/patient'
 	export default {
 		onLaunch: async function() {
 			// #ifdef MP-WEIXIN
@@ -65,26 +57,15 @@
 				this.showLoging()
 				let res = await getOpenIdAndSessionKey()
 				if (res.code === 0) {
-					let {
-						openId,
-						sessionKey,
-						needRegisterFlag,
-						pubUser
-					} = res.data
-					let obj = {
-						openId,
-						sessionKey
-					}
+					let { openId, sessionKey, needRegisterFlag, pubUser } = res.data
+					let obj = { openId, sessionKey }
 					// 存到store中, 设置小程序token
 					this.setWeChatToken(obj)
 
 					if (needRegisterFlag === '0' && pubUser) {
 						// 存到store中
 						this.setPatientInfo(pubUser)
-						let {
-							username,
-							idCard
-						} = pubUser
+						let { username, idCard } = pubUser
 						if (username && idCard) {
 							// 老用户 -> 登录成功 -> 保存用户信息(token携带在其中)
 							this.login()

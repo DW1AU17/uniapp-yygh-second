@@ -34,3 +34,10 @@ let WECHAT_URL = 'wechat/'
 export function wechatLogin(data) {
 	return axios('handlerWeChatUserinfo', data, WECHAT_URL)
 }
+
+/**
+ * 重新获取token
+ */
+export function refreshToken(data) {
+	return axios('refreshToken', data, BASE_SUFFIX)
+}

@@ -94,7 +94,7 @@
 					let { cardType, cardCode } = this.patInfo
 					/* 获取预约记录接口 */
 					let res = await getRegisterList({ cardType, cardCode })
-					if (res.data) {
+					if (res.data && res.code === 1) {
 						let data = res.data.map(item => {
 							item.pavName = getPavName(item.hospitalId)
 							return item

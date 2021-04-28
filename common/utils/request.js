@@ -1,6 +1,8 @@
 import { errorAlert } from './prompt.js'
 import store from '@/store/index'
-// import { getUrlParam } from './index.js'
+import { refreshToken as getToken } from '@/common/api/login.js'
+
+let index = 0
 
 // 三种情况
 /**
@@ -17,8 +19,8 @@ export default function axios(url, data = {}, prefix = 'app/register/') {
 	//     console.log('生产环境')
 	// }
 	
-	const BASE_URl = 'https://www.zjgoshine.com:9001/' + prefix;
-	// const BASE_URl = 'http://192.168.1.190:8085/' + prefix;
+	// const BASE_URl = 'https://www.zjgoshine.com:9001/' + prefix;
+	const BASE_URl = 'http://192.168.1.253:8085/' + prefix;
 	let white = ['app/wechat', 'app/login']
 	if (!prefix.includes('app/login') && !data.length) {
 		let { orgCode, id: hospitalId } = store.state.pavilion
@@ -45,17 +47,20 @@ export default function axios(url, data = {}, prefix = 'app/register/') {
 			header,
 			method,
 			data,
-			success(res) {
+			async success(res) {
 				let { code, message } = res.data
 				// 异常提示
-				errorHandle(code, message)
+				if (code === 1) errorHandle(code, message)
+				else if (code === 401 && index < 2) {
+					await getTokenAgain()
+					index++
+					let newRes = await axios(url, data, prefix)
+					resolve(newRes)
+					return
+				}
 				resolve(res.data)
 			},
 			fail(err) {
-				// errorAlert('请先登录')
-				// uni.reLaunch({
-				// 	url: '/pages/login/login'
-				// })
 				reject(err)
 			}
 		})
@@ -95,4 +100,12 @@ function errorHandle(code, message) {
 		}
 		// #endif
 	}
+}
+
+async function getTokenAgain() {
+	let { refreshToken } = store.state.patientInfo
+	// 重新获取token
+	let res = await getToken({ refreshToken })
+	let { token } = res.data
+	store.state.patientInfo.authToken = token
 }

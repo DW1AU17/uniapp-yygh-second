@@ -110,7 +110,7 @@
 					let res = await addPatient(data)
 					if (res.code == 0) {
 						/* 添加信息到store中 */
-						this.addPatient({ obj: data, type: this.type })
+						this.addPatient({ obj: res.data, type: this.type })
 						this.successAlert('添加成功')
 						setTimeout(() => {
 							uni.navigateBack({ delta: 1 })
@@ -121,13 +121,13 @@
 				}
 			},
 			delPatient() {
-				let { id } = this.ruleForm
+				let { id, userId } = this.ruleForm
 				let that = this
 				uni.showModal({
 					title: '确定要解绑就诊人?',
 					async success(res) {
 						if (res.confirm) {
-							let data = { id }
+							let data = { id, userId }
 							let res = await removePatient(data)
 							if (res.code == 0) {
 								that.successAlert('删除成功')

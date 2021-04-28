@@ -16,24 +16,16 @@
 				<view class="fs32 name" v-else>{{patientInfo.username || wechatUserInfo.nickName}}</view>
 			<!-- #endif -->
 			<!-- #ifdef H5 -->
-				<view v-if="!hasLogin" class="login" @tap="goLoginPage">点击登录</view>
+				<view v-if="!hasLogin" class="login" @tap="goNextPage('login')">点击登录</view>
 				<view class="fs32 name" v-else>{{patientInfo.username}}</view>
 			<!-- #endif -->
 		</view>
 		<view class="btn-box border-box">
 			<view class="border-box-inner">
-				<view class="my-bookings gradient" @tap="goRegRecordPage">
-					<text>预约记录</text>
+				<view v-for="item in menu" :key="item.id" class="gradient" @tap="goNextPage(item.page)">
+					<text>{{item.name}}</text>
 					<image src="/static/ui/arrow-right.png">
 				</view>
-				<view class="patient-manage gradient" @tap="goPatManagePage">
-					<text>就诊人管理</text> 
-					<image src="/static/ui/arrow-right.png">
-				</view>	
-				<!-- <view class="patient-manage gradient" @tap="goAboutPage">
-					<text>关于桐君堂</text> 
-					<image src="/static/ui/arrow-right.png">
-				</view>	 -->
 				<!-- <view class="login-out" @tap="loginOut" hidden>
 					<text>退出当前登录</text>
 				</view> -->	
@@ -41,7 +33,7 @@
 					<button v-if="!hasLogin" class="logout" open-type="getUserInfo" @getuserinfo="mpGetUserInfo"></button>
 				<!-- #endif -->
 				<!-- #ifdef H5 -->
-					<view v-if="!hasLogin" @tap="goLoginPage" class="logout"></view>
+					<view v-if="!hasLogin" @tap="goNextPage('login')" class="logout"></view>
 				<!-- #endif -->
 			</view>		
 		</view>
@@ -52,11 +44,23 @@
 	import { mapState, mapMutations } from 'vuex'
 	import { wechatLogin } from '@/common/api/wechat'
 	import { judgeSessionKeyExpired, getOpenIdAndSessionKey } from '@/common/utils/wechat'
+	let pageMap = new Map([
+		['login', '/pages/login/login'],
+		['regRecord', '/pages/registerRecord/index'],
+		['patManage', '/pages/patientManage/index?type=mine'],
+		['invoice', '/pages/invoice/index'],
+	])
+	let menu = [
+		{ id: 1, name: '预约记录', page: 'regRecord' },
+		{ id: 2, name: '就诊人管理', page: 'patManage' },
+		{ id: 3, name: '申请开票', page: 'invoice' },
+	]
 	export default {
 		data() {
 			return {
 				result: {},
 				source: 'wechat', // 来源
+				menu,
 			}
 		},
 		computed: {
@@ -122,26 +126,11 @@
 					}
 				})
 			},
-			goLoginPage() {
+			goNextPage(type) {
 				uni.navigateTo({
-					url: '/pages/login/login'
+					url: pageMap.get(type) || '/pages/skip/skip'
 				})
-			},
-			goRegRecordPage() {
-				uni.navigateTo({
-					url: '/pages/registerRecord/index'
-				})
-			},
-			goPatManagePage() {
-				uni.navigateTo({
-					url: '/pages/patientManage/index?type=mine'
-				})
-			},
-			goAboutPage() {
-				uni.navigateTo({
-					url: `/pages/about/about`
-				})
-			},
+			}
 		}
 	}
 </script>

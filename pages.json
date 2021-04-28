@@ -136,6 +136,12 @@
 				"navigationBarTitleText": "问卷调查",
 				"navigationStyle": "custom"
 			}
+		},
+		{
+			"path": "pages/invoice/index",
+			"style": {
+				"navigationBarTitleText": "申请开票"
+			}
 		}
 	],
 	"globalStyle": {
