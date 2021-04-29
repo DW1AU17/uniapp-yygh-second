@@ -120,7 +120,7 @@
 				}
 				if (this.isLogin()) {
 					let patientInfo = this.patientList[this.currentIndex]
-					let { cardType, cardCode, userName, phoneNumber } = patientInfo
+					let { cardType, cardCode, userName, phoneNumber, id: suffererId } = patientInfo
 					// 获取当前选择人员patId
 					let { data: { id: patId } } = await getCurrentPatientInfo({ cardType, cardCode, userName, phoneNumber }) 
 					if (!Object.keys(patientInfo).length) {
@@ -130,8 +130,7 @@
 					}
 					let { timeState, id: sourceDetailId, schedulingId, schedulingDate: visitDate, orgCode } = this.orderInfo
 					orgCode = orgCode || this.orgCode
-					let data = { timeState, sourceDetailId, schedulingId, visitDate, orgCode, patId }
-					
+					let data = { timeState, sourceDetailId, schedulingId, visitDate, orgCode, patId, suffererId }
 					/* 提交预约信息 */ 
 					let res = await commitRegisterInfo(data)
 					if (res.code == 0) {
