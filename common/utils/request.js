@@ -18,7 +18,7 @@ export default function axios(url, data = {}, prefix = 'app/register/') {
 	// } else {
 	//     console.log('生产环境')
 	// }
-	
+
 	// 正式
 	// const BASE_URl = 'https://www.zjgoshine.com:9001/' + prefix;
 	// 测试

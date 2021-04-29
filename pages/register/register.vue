@@ -37,7 +37,6 @@
 				<view>2. 最多可添加5位就诊人</view>
 			</view>
 		</view>
-		
 		<view class="cus-footer">
 			<button type="default" class="btn-footer" @tap="formSubmit">保存</button>
 		</view>
