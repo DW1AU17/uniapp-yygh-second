@@ -120,9 +120,9 @@
 				}
 				if (this.isLogin()) {
 					let patientInfo = this.patientList[this.currentIndex]
-					let { cardType, cardCode, userName, phoneNumber, id: suffererId } = patientInfo
+					let { cardType, cardCode, userName, phoneNumber, id: suffererId, userId } = patientInfo
 					// 获取当前选择人员patId
-					let { data: { id: patId } } = await getCurrentPatientInfo({ cardType, cardCode, userName, phoneNumber }) 
+					let { data: { id: patId } } = await getCurrentPatientInfo({ cardType, cardCode, userName, phoneNumber, userId, suffererId }) 
 					if (!Object.keys(patientInfo).length) {
 						return this.errorAlert('请选择就诊人')
 					} else if (!patId) {
