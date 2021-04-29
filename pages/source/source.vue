@@ -54,12 +54,13 @@
 										<view v-for="(item, index) in sourceListDetail[dateItem]" :key="index">
 											<text 
 												class="btn" 
-												v-if="item.state !== 1 && item.numremain != 0 && !item.numberReleasedFlag"
+												v-if="item.state !== 1 && item.numremain != 0 && !item.numberReleasedFlag && item.schstate == '0'"
 												@tap="appointment(dateItem, index)"
 												>总{{item.numcount}}剩{{item.numremain}}</text>
 											</text>
-											<text v-if="item.state !== 1 && item.numremain != 0 && item.numberReleasedFlag">即将放号</text>
-											<text class="btn disabled" v-else-if="item.state !== 1 && item.numremain == 0">已满</text>
+											<text v-else-if="item.schstate == '1'" class="btn disabled">停诊</text>
+											<text v-else-if="item.state !== 1 && item.numremain != 0 && item.numberReleasedFlag">即将放号</text>
+											<text v-else-if="item.state !== 1 && item.numremain == 0" class="btn disabled">已满</text>
 										</view>	
 									</view>
 								</view>

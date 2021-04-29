@@ -46,7 +46,7 @@
 </template>
 
 <script>
-	import validateForm from '@/common/utils/validateForm.js'
+	import { validateForm } from '@/common/utils/validateForm.js'
 	import { addPatient, removePatient } from '@/common/api/patient.js'
 	import { mapState, mapMutations } from 'vuex'
 	let rules = [
@@ -79,7 +79,6 @@
 			// 修改信息
 			eventChannel.on('editPatientInfoFromManagePage', data => {
 				if (data) {
-					console.log(data)
 					let { userName, phoneNumber, cardCode, cardType, userId, id } = data
 					this.type = 'edit'
 					this.ruleForm = { userName, phoneNumber, cardCode, cardType, userId, id }

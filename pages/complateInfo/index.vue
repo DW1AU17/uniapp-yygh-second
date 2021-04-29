@@ -39,7 +39,7 @@
 </template>
 
 <script>
-	import validateForm from '@/common/utils/validateForm.js'
+	import { validateForm } from '@/common/utils/validateForm.js'
 	import { updatePatient, getPatientList } from '@/common/api/patient.js'
 	import { mapState, mapMutations } from 'vuex'
  	let rules = [

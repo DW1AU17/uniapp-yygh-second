@@ -48,12 +48,13 @@
 		['login', '/pages/login/login'],
 		['regRecord', '/pages/registerRecord/index'],
 		['patManage', '/pages/patientManage/index?type=mine'],
-		['invoice', '/pages/invoice/index'],
+		['invoice', '/pages/invoice/chargeList'],
 	])
+	// 菜单栏
 	let menu = [
 		{ id: 1, name: '预约记录', page: 'regRecord' },
 		{ id: 2, name: '就诊人管理', page: 'patManage' },
-		{ id: 3, name: '申请开票', page: 'invoice' },
+		// { id: 3, name: '申请开票', page: 'invoice' },
 	]
 	export default {
 		data() {

@@ -68,7 +68,7 @@
 		},
 		methods: {
 			confirm() {
-				this.initPatientInfo()
+				this.getRegList() 
 			},
 			// handleClick(item) {
 			// 	this.patInfo = item
@@ -94,7 +94,7 @@
 					let { cardType, cardCode } = this.patInfo
 					/* 获取预约记录接口 */
 					let res = await getRegisterList({ cardType, cardCode })
-					if (res.data && res.code === 1) {
+					if (res.data && res.code === 0) {
 						let data = res.data.map(item => {
 							item.pavName = getPavName(item.hospitalId)
 							return item
@@ -152,7 +152,6 @@
 			 * 再次预约
 			 */
 			orderAgain({ doctorId, doctorName }) {
-				console.log()
 				let { id: hospitalId, orgCode } = this.pavilion
 				uni.navigateTo({
 					url: `/pages/source/source?orgCode=${orgCode}&hospitalId=${hospitalId}&id=${doctorId}&name=${doctorName}`

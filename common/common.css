@@ -57,6 +57,9 @@ page>view {
 .mr10 {
 	margin-right: 10px;
 }
+.mr30 {
+	margin-right: 30px;
+}
 .ml10 {
 	margin-left: 10px;
 }
@@ -105,6 +108,10 @@ page>view {
 .lh1 {
 	line-height: 1;
 }
+.lh2 {
+	line-height: 2;
+}
+
 
 .uni-page-head {
 	/* box-shadow: 0px 1px 6px 1px #666; */

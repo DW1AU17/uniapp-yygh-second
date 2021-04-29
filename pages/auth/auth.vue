@@ -15,6 +15,7 @@
 	import { mapMutations, mapState } from 'vuex'
 	import { wechatHandleUserInfo } from '@/common/api/wechat'
 	import { getPatientList } from '@/common/api/patient'
+	import { judgeSessionKeyExpired, getOpenIdAndSessionKey } from "@/common/utils/wechat"
 	export default {
 		data() {
 			return {
@@ -38,12 +39,13 @@
 			...mapState(['wechatToken'])
 		},
 		methods: {
-			...mapMutations(['login', 'setPatientInfo', 'setPatientList']),
+			...mapMutations(['login', 'setWeChatToken', 'setPatientInfo', 'setPatientList']),
 			/**
 			 * 获取手机号
 			 */
 			async getPhoneNumber(e) {
 				this.showLoging()
+				await this.checkSessionKey()
 				let { detail: { encryptedData, iv, errMsg } } = e
 				if (errMsg === 'getPhoneNumber:ok') {
 					let { openId, sessionKey } = this.wechatToken
@@ -99,8 +101,29 @@
 				} else {
 					this.errorAlert('取消操作')
 				}
-				uni.hideLoading()
+				this.hideLoading()
 			},
+			/**
+			 * 判断sessionKey是否已经过期
+			 */
+			async checkSessionKey() {
+				// 获取 session 状态
+				let res = await judgeSessionKeyExpired()
+				console.log(res)
+				if (res.code === 1 || Object.keys(this.wechatToken).length === 0) {
+					// 已过期
+					this.weChatLogin()
+				}
+			},
+			async weChatLogin() {
+				let res = await getOpenIdAndSessionKey()
+				if (res.code === 0) {
+					let { openId, sessionKey } = res.data
+					let obj = { openId, sessionKey }
+					// 存到store中, 设置小程序token
+					this.setWeChatToken(obj)
+				}
+			}
 		}
 	}
 </script>

@@ -10,21 +10,6 @@
 				// 判断小程序是否有更新
 				this.checkUpdateMessage()
 			// #endif
-			
-			// uni.connectSocket({
-			// 	url: "ws://192.168.1.190:8085/app/api/websocket/%7Buid%7D",
-			// 	success(res) {
-			// 		console.log(res)
-			// 	},
-			// 	fail(err) {
-			// 		console.log(err)
-			// 	}
-			// })
-			
-			// uni.onSocketMessage((res) => {
-			// 	console.log('新消息', res)
-			// })
-			
 		},
 		onShow: async function() {
 			console.log('App Show')

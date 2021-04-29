@@ -30,5 +30,8 @@ export function successAlert(title, duration = 2000) {
 export function showLoging(title = '加载中') {
 	uni.showLoading({ title })
 }
-// 调 uni.hideLoading 关闭
+
+export function hideLoading() {
+	uni.hideLoading()
+}
 

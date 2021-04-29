@@ -19,10 +19,15 @@ export default function axios(url, data = {}, prefix = 'app/register/') {
 	//     console.log('生产环境')
 	// }
 	
+	// 正式
 	// const BASE_URl = 'https://www.zjgoshine.com:9001/' + prefix;
+	// 测试
 	const BASE_URl = 'http://192.168.1.253:8085/' + prefix;
+	// 发票相关
+	// const BASE_URl = 'http://192.168.1.37:8002/' + prefix;
+
 	let white = ['app/wechat', 'app/login']
-	if (!prefix.includes('app/login') && !data.length) {
+	if (!['app/login', 'charges/'].includes(prefix) && !data.length) {
 		let { orgCode, id: hospitalId } = store.state.pavilion
 		data = {
 			...data,
