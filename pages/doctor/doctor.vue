@@ -140,7 +140,9 @@
 			},
 			editImgUrl(data) {
 				let index = this.docList.findIndex(item => item.name === data.name)
-				this.docList[index].img = data.url
+				if (index > -1 && this.docList?.[index]) {
+					this.docList[index].img = data.url
+				}
 			}
 		}
 	}

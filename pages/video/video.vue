@@ -3,7 +3,7 @@
         <view class="video-box">
 			<video
 				v-if="name"
-				:src="'https://www.zjgoshine.com:9001/video/'+ name +'.mp4'"
+				:src="'https://www.ezhenmai.cn:9001:9001/video/'+ name +'.mp4'"
 				:autoplay="true"
 				:show-fullscreen-btn="false"
 				@error="videoErrorCallback" 
@@ -55,14 +55,14 @@
 			return {
 				title: this.title,
 				path: `/pages/video/video?name=${this.name}`,
-				imageUrl: `https://www.zjgoshine.com:9001/video/${img}1.jpg`
+				imageUrl: `https://www.ezhenmai.cn:9001/video/${img}1.jpg`
 			}
 		},
 		onShareTimeline() {
 			return {
 				title: this.title,
 				path: `/pages/video/video?name=${this.name}`,
-				imageUrl: `https://www.zjgoshine.com:9001/video/${this.name}.jpg`
+				imageUrl: `https://www.ezhenmai.cn:9001/video/${this.name}.jpg`
 			}
 		},
 	    methods: {

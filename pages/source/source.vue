@@ -9,7 +9,7 @@
 								<image v-if="doctorInfo.sffLoginNum == 0" src="/static/ui/0000.jpg" lazy-load/>
 								<image 
 									v-else
-									:src="'https://www.zjgoshine.com:9001/resource/'+doctorInfo.sffLoginNum+'.jpg'"
+									:src="'https://www.ezhenmai.cn:9001/resource/'+doctorInfo.sffLoginNum+'.jpg'"
 									@error="handleError"
 									mode="aspectFill"
 								>
@@ -287,7 +287,7 @@
 				this.currentIndex = e.detail.value
 			},	
 			goOrderPage() {
-				let data = { ...this.getNumList[this.currentIndex], 
+				let data = { ...this.getNumList?.[this.currentIndex], 
 					totalFee: this.totalFee, 
 					orgCode: this.doctorInfo.orgCode,
 					pavName: this.doctorInfo.pavName

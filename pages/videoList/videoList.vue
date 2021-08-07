@@ -12,7 +12,7 @@
 							>
 							<view class="item-inner">
 								<view class="img">
-									<image :src="'https://www.zjgoshine.com:9001/video/'+item+'.jpg'" mode="widthFix" lazy-load></image>
+									<image :src="'https://www.ezhenmai.cn:9001/video/'+item+'.jpg'" mode="widthFix" lazy-load></image>
 								</view>
 								<view v-if="!item.includes('桐君堂')" class="text">福到健康到, {{item}}医师送好礼啦！</view>							
 								<view v-else class="text">福到健康到, {{item}}送祝福啦！</view>							

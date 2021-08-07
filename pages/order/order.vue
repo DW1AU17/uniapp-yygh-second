@@ -35,18 +35,20 @@
 					<text class="base-color fs26" @tap="goAddPage">+添加就诊人</text>
 				</view>
 				<view class="patient common-detail">
-					<view v-for="(item, index) in patientList" v-if="item.state != 1 || (item.cardCode == patientInfo.idCard)" :key="item.patId" class="item">
-						<view class="left">
-							<radio :checked="currentIndex == index" @tap="currentIndex = index" color="#d09c5b" />
-						</view>
-						<view class="right">
-							<view class="fs30 fc000">{{item.userName}}</view>
-							<view class="lh1 fs23">
-								<text v-show="item.phoneNumber">手机号:{{formatPhone(item.phoneNumber)}}; </text>
-								<text v-show="item.cardCode">身份证:{{formatIDCard(item.cardCode)}}</text>
+					<block v-for="(item, index) in patientList" :key="item.patId">
+						<view class="item" v-if="item.state != 1 || (item.cardCode == patientInfo.idCard)">
+							<view class="left">
+								<radio :checked="currentIndex == index" @tap="currentIndex = index" color="#d09c5b" />
 							</view>
+							<view class="right">
+								<view class="fs30 fc000">{{item.userName}}</view>
+								<view class="lh1 fs23">
+									<view v-show="item.phoneNumber">手机号:{{formatPhone(item.phoneNumber)}}; </view>
+									<view v-show="item.cardCode">身份证:{{formatIDCard(item.cardCode)}}</view>
+								</view>
+							</view>							
 						</view>
-					</view>
+					</block>
 				</view>
 			</view>
 		</view>
@@ -81,7 +83,7 @@
 			// 接受source页面传递的数据
 			const eventChannel = this.getOpenerEventChannel()
 			eventChannel.on('orderPageAcceptData', (data) => {
-				this.orderInfo = data.data
+				this.orderInfo = data?.data || {}
 			})
 			this.getDefaultPatient()
 		},
@@ -120,26 +122,34 @@
 				}
 				if (this.isLogin()) {
 					let patientInfo = this.patientList[this.currentIndex]
-					let { cardType, cardCode, userName, phoneNumber, id: suffererId, userId } = patientInfo
-					// 获取当前选择人员patId
-					let { data: { id: patId } } = await getCurrentPatientInfo({ cardType, cardCode, userName, phoneNumber, userId, suffererId }) 
-					if (!Object.keys(patientInfo).length) {
-						return this.errorAlert('请选择就诊人')
-					} else if (!patId) {
-						return this.errorAlert('患者信息有误请联系馆里人员')
-					}
-					let { timeState, id: sourceDetailId, schedulingId, schedulingDate: visitDate, orgCode } = this.orderInfo
-					orgCode = orgCode || this.orgCode
-					let data = { timeState, sourceDetailId, schedulingId, visitDate, orgCode, patId, suffererId }
-					/* 提交预约信息 */ 
-					let res = await commitRegisterInfo(data)
-					if (res.code == 0) {
-						this.successAlert('预约成功')
-						setTimeout(() => {
-							uni.switchTab({
-								url: '/pages/tabBar/mine/mine'
-							})
-						}, 1000)
+					console.log('[patientInfo]: ', patientInfo)
+					if (patientInfo) {
+						let { cardType, cardCode, userName, phoneNumber, id: suffererId, userId } = patientInfo
+						// 获取当前选择人员patId
+						let patRes = await getCurrentPatientInfo({ cardType, cardCode, userName, phoneNumber, userId, suffererId }) 
+						let patId = patRes?.data?.id
+						console.log('[patRes]: ', patRes)
+						if (!Object.keys(patientInfo).length) {
+							return this.errorAlert('请选择就诊人')
+						} else if (!patId) {
+							return this.errorAlert('患者信息有误请联系馆里人员')
+						}
+						let { timeState, id: sourceDetailId, schedulingId, schedulingDate: visitDate, orgCode } = this.orderInfo
+						orgCode = orgCode || this.orgCode
+						let data = { timeState, sourceDetailId, schedulingId, visitDate, orgCode, patId, suffererId }
+						/* 提交预约信息 */ 
+						let res = await commitRegisterInfo(data)
+						console.log('[res]: ', res)
+						if (res.code == 0) {
+							this.successAlert('预约成功')
+							setTimeout(() => {
+								uni.switchTab({
+									url: '/pages/tabBar/mine/mine'
+								})
+							}, 1000)
+						}						
+					} else {
+						this.errorAlert('请选择就诊人')
 					}
 				}
 			},
